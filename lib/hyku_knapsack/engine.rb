@@ -60,6 +60,7 @@ module HykuKnapsack
       #
       # https://github.com/scientist-softserv/adventist-dl/blob/97bd05946345926b2b6c706bd90e183a9d78e8ef/config/application.rb#L68-L73
       Hyrax::DerivativeService.services = [
+        # Adventist::TextFileTextExtractionService,
         IiifPrint::PluggableDerivativeService
       ]
 
