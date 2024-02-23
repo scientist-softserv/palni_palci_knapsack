@@ -1,0 +1,17 @@
+<%# OVERRIDE Hyrax 3.4.2 to enable markdown in the work title %>
+
+<!-- Fix thumbnail nil problem & remove depositor -->
+<li class="recent-item">
+  <div class="row">
+    <div class="col-sm-12">
+      <span class="sr-only"><%= t('hyrax.homepage.recently_uploaded.document.title_label') %></span>
+      <h3>
+        <%= link_to [main_app, recent_document] do %>
+          <%= markdown("#{render_thumbnail_tag(recent_document, {width: 90}, {suppress_link: true}).to_s + recent_document.to_s}") %>
+        <% end %>
+      </h3>
+      <%# Removed Depositor %>
+      <%# Removed item keywords %>
+    </div>
+  </div>
+</li>

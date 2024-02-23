@@ -1,0 +1,12 @@
+---
+fr:
+  hyrax:
+    generic_work:
+      labels:
+        admin_note: Remarques administratives
+    icons:
+      generic_work: fa fa-file-text-o
+    select_type:
+      generic_work:
+        description: Type de travail à usage général. Sélectionnez cette option si les types de travaux plus spécifiques ci-dessous ne conviennent pas au travail que vous souhaitez ajouter.
+        name: Œuvres Génériques

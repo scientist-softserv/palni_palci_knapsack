@@ -1,0 +1,78 @@
+---
+it:
+  simple_form:
+    cancel: Annulla
+    error_notification:
+      default_message: 'Si prega di rivedere i problemi di seguito:'
+    hints:
+      account:
+        admin_emails: Inserisci un indirizzo email alla volta
+        allow_signup: Permetti agli utenti di iscriversi al tuo repository
+        cache_api: Abilita la cache per gli endpoint API. Sperimentale
+        contact_email: L'indirizzo email da cui saranno inviate le notifiche di sistema. È richiesta una configurazione aggiuntiva per aggiungere un indirizzo da domini diversi dal dominio del sito
+        contact_email_to: L'indirizzo email al quale i messaggi inviati tramite la pagina di contatto sono inviati
+        doi_reader: Mostra la capacità di leggere da Datacite per popolare i record. Lavoro in corso, non utilizzare
+        doi_writer: Scrivi DOI per i record. Lavoro in corso, non utilizzare
+        email_format: Imposta una lista di domini email che possono iscriversi a questo repository es. (@ubiquitypress.com @gmail.com). Lascia uno spazio tra ogni dominio.
+        email_subjet_prefix: Stringa da mettere davanti agli oggetti delle email di sistema.
+        enable_oai_metadata: Abilita o disabilita il link OAI
+        fcrepo_endpoint:
+          base_path: Il percorso base di Fedora dovrebbe iniziare con una barra e NON terminare con una barra
+          url: L'URL di Fedora non dovrebbe terminare con una barra
+        file_acl: Disattiva se stai utilizzando un sistema di file come samba o nfs che non supporta le liste di controllo degli accessi
+        file_size_limit: Questo dovrebbe essere impostato almeno a 536870912000
+        geonames_username: Registrati su http://www.geonames.org/manageaccount
+        google_analytics_id: L'ID del tuo account Google Analytics
+        gtm_id: L'ID del tuo account Google Tag Manager
+        is_public: Gli utenti possono scoprire il tuo sito nella pagina principale o accedere alle tue pagine senza un nome utente/password speciale?
+        locale_name: 'Il nome del suffisso specifico del tenant aggiunto ai loro file locale.yml. Aggiungi solo caratteri alfabetici, niente simboli o numeri, questi saranno poi capitalizzati.
+
+          '
+        monthly_email_list: Lista di indirizzi email ai quali inviare il rapporto mensile. Lascia uno spazio tra ogni email
+        name: Un nome singolo o con trattino usato per gli aspetti tecnici del repository (ad es., "acme" o "acme-biblioteca").
+        oai_admin_email: Indirizzo email di contatto dell'endpoint OAI
+        shared_login: Abilita o disabilita l'accesso condiviso
+        ssl_configured: Impostalo su vero se stai utilizzando https
+        weekly_email_list: Lista di indirizzi email ai quali inviare il rapporto settimanale. Lascia uno spazio tra ogni email
+        yearly_email_list: Lista di indirizzi email ai quali inviare il rapporto annuale. Lascia uno spazio tra ogni email
+      hyku_group:
+        description: Un breve riassunto del ruolo del gruppo
+      user:
+        email: Inserisci un indirizzo email alla volta. Puoi anche inviare nuovamente un invito tramite questo modulo. I ruoli si applicano solo a questo tenant.
+    labels:
+      account:
+        admin_emails: Aggiungi o invita un nuovo amministratore (tramite email)
+        cname: Nome di dominio principale
+        fcrepo_endpoint:
+          base_path: Percorso base
+          url: URL
+        gtm_id: Google Tag Manager
+        name: Nome breve
+        solr_endpoint:
+          url: URL
+        tenant: UUID del tenant
+      add_user_to_group:
+        user_ids: ID utente
+      defaults:
+        admin_note: Note amministrative
+      domain_names:
+        cname: Nome di dominio
+      group_search:
+        q: Ricerca
+      hyku_group:
+        description: Descrizione
+      page_size:
+        per: Mostra
+      user:
+        display_name: Il tuo nome
+        email: Indirizzo email
+      user_search:
+        uq: Ricerca utente
+    'no': 'No'
+    placeholders:
+      user_search:
+        uq: Nome o nome utente
+    required:
+      mark: "*"
+      text: richiesto
+    'yes': Sì
