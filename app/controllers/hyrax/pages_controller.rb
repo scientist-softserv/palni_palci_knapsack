@@ -15,7 +15,7 @@ module Hyrax
     # OVERRIDE: Hyrax v3.4.0 Add for theming
     # Adds Hydra behaviors into the application controller
     include Blacklight::SearchContext
-    include Blacklight::SearchHelper
+    # include Blacklight::SearchHelper # TODO: NameError: uninitialized constant Blacklight::SearchHelper (NameError)
     include Blacklight::AccessControls::Catalog
 
     # OVERRIDE: Adding inject theme views method for theming

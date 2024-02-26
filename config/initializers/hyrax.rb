@@ -196,7 +196,7 @@ Hyrax.config do |config|
     uri.sub(/\Ahttp:/, 'https:')
   end
 
-  config.nested_relationship_reindexer = ->(id:, extent:) {}
+  # config.nested_relationship_reindexer = ->(id:, extent:) {} TODO: NoMethodError
 end
 
 Date::DATE_FORMATS[:standard] = "%m/%d/%Y"

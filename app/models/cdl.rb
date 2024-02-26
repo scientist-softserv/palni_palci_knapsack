@@ -14,7 +14,7 @@ class Cdl < ActiveFedora::Base
   include PdfBehavior
   include VideoEmbedBehavior
 
-  self.indexer = CdlIndexer
+  # self.indexer = CdlIndexer TODO: NameError: uninitialized constant CdlIndexer
 
   before_destroy :destroy_split_pages
   after_destroy :destroy_cdl_group

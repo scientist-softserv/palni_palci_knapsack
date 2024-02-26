@@ -21,11 +21,12 @@ app_excluded_exceptions = ["ActiveRecord::RecordNotFound",
                            "Riiif::ImageNotFoundError",
                            "I18n::InvalidLocale"]
 
+# TODO: NameError: uninitialized constant Sentry
+# Sentry.init do |config|
+#   config.excluded_exceptions = (config.excluded_exceptions + app_excluded_exceptions).uniq
+# end
 
-Sentry.init do |config|
-  config.excluded_exceptions = (config.excluded_exceptions + app_excluded_exceptions).uniq
-end
-
-Raven.configure do |config|
-  config.excluded_exceptions = (config.excluded_exceptions + app_excluded_exceptions).uniq
-end
+# TODO: NameError: uninitialized constant Raven
+# Raven.configure do |config|
+#   config.excluded_exceptions = (config.excluded_exceptions + app_excluded_exceptions).uniq
+# end
