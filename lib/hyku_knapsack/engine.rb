@@ -47,10 +47,12 @@ module HykuKnapsack
 
     config.after_initialize do
       HykuKnapsack::Engine.root.glob("app/**/*_decorator*.rb").sort.each do |c|
+        c = c.to_s
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
 
       HykuKnapsack::Engine.root.glob("lib/**/*_decorator*.rb").sort.each do |c|
+        c = c.to_s
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
 
