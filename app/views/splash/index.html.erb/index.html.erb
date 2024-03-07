@@ -8,7 +8,7 @@
   <div class="">
     <h1>Collaborative Repository</h1>
     <h3 class="splash-page">
-      Welcome to our shared repository, where you'll find scholarly research, cultural heritage items, 
+      Welcome to our shared repository, where you'll find scholarly research, cultural heritage items,
       educational materials, and more from libraries across PALNI, PALCI, and other <a href="http://hykuforconsortia.org/" target="_blank">Hyku for Consortia</a> partners.
     </h3>
     <h3 class="splash-page">
@@ -62,5 +62,20 @@
       <li><%= link_to "About", "https://www.hykuforconsortia.org", target: "blank" %></li>
       <li><%= mail_to "consortial-ir@palci.org", "Contact" %></li>
     </ul>
+    <div class="container-fluid">
+      <div class="navbar-text text-left">
+        <p><%= t('hyrax.footer.service_html') %></p>
+        <p>Hyku v<%= Hyku::VERSION %></p>
+      </div>
+      <div class="navbar-right">
+        <div class="navbar-text text-right">
+          <p><%= t('hyrax.footer.copyright_html', current_year: Time.now.year) %></p>
+          <p><%= t('hyrax.background_attribution_html') %></p>
+        </div>
+        <div class="navbar-text text-right">
+          <p><a href="https://hykuforconsortia.palni.org/privacy" target="_blank">Privacy Policy</a></p>
+        </div>
+      </div>
+    </div>
   </nav>
 </section>
