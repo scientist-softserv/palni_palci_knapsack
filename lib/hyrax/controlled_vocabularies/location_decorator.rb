@@ -10,6 +10,28 @@ module Hyrax
       def split(*)
         []
       end
+
+      def present?
+        return true if id
+
+        false
+      end
+
+      def rdf_label
+        return [id.gsub('http://fake#', '').gsub('%20', ' ')] if fake_location?
+
+        super
+      end
+
+      def full_label
+        return rdf_label.first.to_s if fake_location?
+
+        super
+      end
+
+      def fake_location?
+        id.start_with?('http://fake#')
+      end
     end
   end
 end
