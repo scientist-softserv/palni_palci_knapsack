@@ -55,6 +55,7 @@ Bulkrax.setup do |config|
     'accessibility_hazard' => { from: ['accessibility_hazard'], split: '\|' },
     'accessibility_summary' => { from: ['accessibility_summary'] },
     'additional_information' => { from: ['additional_information'], split: '\|', generated: true },
+    'admin_note' => { from: ['admin_note'] },
     'admin_set_id' => { from: ['admin_set_id'], generated: true },
     'alternate_version' => { from: ['alternate_version'], split: '\|' },
     'alternative_title' => { from: ['alternative_title'], split: '\|', generated: true },
