@@ -69,5 +69,17 @@ RSpec.describe Bulkrax::HasMatchersDecorator, type: :decorator do
         expect(subject.first.full_label).to eq 'Faketown, Kali4nia, United Steaks'
       end
     end
+
+    results = [[], nil, '', ' ']
+    results.each do |result|
+      context "when given a blank value (#{result.inspect})" do
+        let(:result) { result }
+
+        it 'returns the original value' do
+          expect(entry).not_to receive(:geonames_lookup)
+          expect(subject).to eq result
+        end
+      end
+    end
   end
 end

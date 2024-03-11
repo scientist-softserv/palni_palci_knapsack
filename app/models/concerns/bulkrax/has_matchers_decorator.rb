@@ -6,6 +6,8 @@ module Bulkrax
   module HasMatchersDecorator
     def matched_metadata(multiple, name, result, object_multiple)
       if name == 'based_near'
+        return result if result.blank?
+
         result = if result.start_with?('http')
                    Hyrax::ControlledVocabularies::Location.new(RDF::URI.new(result))
                  else
