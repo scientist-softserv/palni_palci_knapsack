@@ -29,7 +29,7 @@ module Bulkrax
           # any parser_mappings fields terms from `config/initializers/bulkrax.rb`
           # or any keys that has sequential numbers like creator_1
           (record[field] ||
-            mapped_from(field).map { |f| record[f] }.first ||
+            mapped_from(field).map { |f| record[f] }.any? ||
             handle_keys_with_numbers(field, record)).blank?
         end
       end

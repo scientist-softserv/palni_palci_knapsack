@@ -194,6 +194,17 @@ RSpec.describe Bulkrax::CsvParserDecorator, type: :decorator do
       end
     end
 
+    context 'when the csv headers do not have underscores' do
+      let(:generic_work_record_with_no_underscores) do
+        generic_work_record.transform_keys { |key| key.to_s.tr('_', ' ') }
+      end
+      let(:records) { [generic_work_record_with_no_underscores] }
+
+      it 'still returns true' do
+        expect(subject.valid_import?).to be true
+      end
+    end
+
     context 'when the csv header is the parser_mappings value' do
       let(:generic_work_record_with_type_instead_of_resource_type) do
         generic_work_record.transform_keys! { |key| key == :resource_type ? :type : key }

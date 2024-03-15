@@ -2,6 +2,7 @@
 
 require 'bagit'
 
+# rubocop:disable Metrics/BlockLength
 Bulkrax.setup do |config|
   # Add or remove local parsers
   config.parsers -= [
@@ -114,12 +115,18 @@ Bulkrax.setup do |config|
     'subject' => { from: ['subject'], split: '\|' },
     'table_of_contents' => { from: ['table_of_contents'], split: '\|' },
     'title' => { from: ['title'], split: '\|' },
+    'video_embed' => { from: ['video_embed'] }
   }
 
+  # currently Bulkrax does not support headers with spaces
+  # here we add the key but with the underscore turned into a space to accommodate
+  parser_mappings.each do |key, value|
+    value[:from] += ([key.tr('_', ' ')] + value[:from].map { |f| f.tr('_', ' ') })
+    value[:from].uniq!
+  end
+
   config.field_mappings['Bulkrax::BagitParser'] = parser_mappings
-  config.field_mappings['Bulkrax::CsvParser'] = parser_mappings.merge(
-    {'video_embed' => { from: ['video_embed'] }}
-    )
+  config.field_mappings['Bulkrax::CsvParser'] = parser_mappings
 
   # Add to, or change existing mappings as follows
   #   e.g. to exclude date
@@ -137,3 +144,4 @@ Bulkrax.setup do |config|
     Hyrax::DashboardController.sidebar_partials[:repository_content] << "hyrax/dashboard/sidebar/bulkrax_sidebar_additions"
   end
 end
+# rubocop:enable Metrics/BlockLength
