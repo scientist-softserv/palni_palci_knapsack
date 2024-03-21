@@ -1,4 +1,4 @@
 [submodule "hyrax-webapp"]
 	path = hyrax-webapp
 	url = https://github.com/samvera/hyku.git
-	branch = i2-knapsack-pals
+	branch = contribute-back-maintenance-sprint
