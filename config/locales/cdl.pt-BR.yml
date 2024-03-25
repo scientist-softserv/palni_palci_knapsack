@@ -1,0 +1,9 @@
+---
+pt-BR:
+  hyrax:
+    icons:
+      cdl: fa fa-file-text-o
+    select_type:
+      cdl:
+        description: CDL obras
+        name: CDL

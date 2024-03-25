@@ -1,0 +1,38 @@
+<% provide :page_title, @presenter.page_title %>
+<div class="row work-type">
+  <div itemscope itemtype="http://schema.org/CreativeWork" class="col-xs-12">
+    <%= render 'work_title', presenter: @presenter %>
+    <%= render 'show_actions', presenter: @presenter %>
+    <div class="panel panel-default">
+      <div class="panel-body py-0">
+        <div class="row">
+          <%= render 'workflow_actions_widget', presenter: @presenter %>
+          <% if @presenter.video_embed_viewer? %>
+            <%= render 'video_embed_viewer', presenter: @presenter %>
+          <% elsif @presenter.iiif_viewer? %>
+            <div class="col-sm-12">
+              <%= render 'representative_media', presenter: @presenter, viewer: true %>
+            </div>
+          <% elsif Flipflop.default_pdf_viewer? && @presenter.show_pdf_viewer? && @presenter.file_set_presenters.any?(&:pdf?) %>
+            <div class="col-sm-12">
+              <%= render 'pdf_js', file_set_presenter: pdf_file_set_presenter(@presenter) %>
+            </div>
+          <% else %>
+            <div class="col-12 text-center">
+              <%= render 'representative_media', presenter: @presenter, viewer: false %> 
+            </div>
+          <% end %>
+        </div>
+        <div class="row py-4">
+          <div class="col-xs-12">
+            <%= render 'work_description', presenter: @presenter %>
+            <dl class="work-show <%= dom_class(@presenter) %> mb-0" <%= @presenter.microdata_type_to_html %>>
+              <%= render 'attribute_rows', presenter: @presenter %>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div><!-- /panel -->
+    <span class='hide analytics-event' data-category="work" data-action="work-view" data-name="<%= @presenter.id %>" >
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<%# OVERRIDE Hyrax 3.4.0 to support shared search & enable markdown on search result titles %>
+
+<% model = document.hydra_model %>
+<div class="search-results-title-row">
+    <% if model == Hyrax::PcdmCollection || model < Hyrax::PcdmCollection %>
+        <h4 class="search-result-title"><%= markdown(link_to document.title_or_label, generate_work_url(document, request)) %></h4>
+        <%= Hyrax::CollectionPresenter.new(document, current_ability).collection_type_badge %>
+    <% else %>
+        <h4 class="search-result-title"><%= markdown(link_to document.title_or_label, generate_work_url(document, request)) %></h4>
+    <% end %>
+</div>

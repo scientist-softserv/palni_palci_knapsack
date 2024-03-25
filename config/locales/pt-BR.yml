@@ -1,0 +1,356 @@
+---
+pt-BR:
+  activefedora:
+    models:
+      cdl: CDL
+      etd: ETD
+      generic_work: Trabalhar
+      image: Imagem
+      oer: OER
+  activerecord:
+    attributes:
+      site:
+        institution_name_full: Nome completo da instituição
+  application:
+    tagline: A solução de repos
+  blacklight:
+    search:
+      fields:
+        facet:
+          contributing_library_sim: Biblioteca colaboradora
+          contributor_sim: Contribuinte
+          human_readable_type_sim: Tipo
+          member_of_collections_sim: Colecções
+          resource_type_sim: Tipo de recurso
+        index:
+          audience_tesim: Público
+          date_tesim: Encontro
+          depositor_tesim: proprietário
+          discipline_tesim: Disciplina
+          education_level_tesim: Nível de educação
+          learning_resource_type_tesim: Tipo de recurso de aprendizagem
+          license: Licença
+          license_tesim: licença
+          resource_type_tesim: Tipo
+          rights_statement_tesim: Declaração de direitos
+        show:
+          additional_information: Informações adicionais sobre direitos
+  errors:
+    messages:
+      valid_embed_url: deve ser uma URL de incorporação válida do YouTube ou Vimeo.
+  helpers:
+    action:
+      become: Tornar-se
+    submit:
+      add_role_to_group:
+        submit: Adicionar
+      add_user_to_group:
+        submit: Adicionar
+      group_search:
+        submit: Ir
+      page_size:
+        submit: Atualizar
+      remove_role_from_group:
+        submit: Remover
+      revoke_membership:
+        submit: Remover
+      user_search:
+        submit: Ir
+  hyku:
+    account:
+      signup_disabled: O registro da conta está desativado
+    admin:
+      flash:
+        access_denied: Você não está autorizado a visualizar esta página
+      groups:
+        action:
+          create: Criar novo grupo
+          edit: Editar grupo e usuários
+          members:
+            description: Os membros do grupo assumem todos os privilégios atribuídos a este grupo.
+          per_page: Atualizar
+          remove:
+            confirmation: Tem certeza de que deseja remover esse grupo?
+            description: Esta ação é irreversível. Ele irá remover todos os privilégios que os membros do grupo foram atribuídos por esse grupo.
+            submit: Remover
+          search:
+            clear: Restabelecer
+        describe_quantity_html: Existem <b>grupos</b> %{number} neste repositório.
+        describe_singular_quantity_html: Há <b>um grupo</b> neste repositório.
+        description:
+          admin: Os usuários neste grupo são considerados administradores para este locatário e têm acesso irrestrito.
+          depositors: Os usuários neste grupo têm permissão para depositar trabalhos em qualquer Admin Set neste locatário.
+          editors: 'Os usuários neste grupo têm permissão para ler e editar todas as coleções e obras neste inquilino. Eles também podem: criar cobranças, depositar e aprovar obras, gerenciar embargos e arrendamentos e gerenciar importadores e exportadores Bulkrax.'
+          registered: Contém todos os usuários que se inscreveram neste locatário.
+        flash:
+          create:
+            failure: O grupo não pôde ser criado
+            invalid: Grupos devem ter um nome
+            success: "%{group} criado"
+          destroy:
+            failure: "%{group} não pôde ser destruído"
+            success: "%{group} destruído"
+          remove:
+            cannot_destroy_default_group: Grupos padrão não podem ser destruídos
+          update:
+            failure: "%{group} não pôde ser atualizado"
+            success: "%{group} atualizado"
+        humanized_name:
+          admin: Administradores de repositório
+          registered: Usuários registrados
+        label:
+          actions: Ações
+          created_at: Data Criada
+          description: Descrição
+          humanized_name: Nome
+          members: Comercial
+          name: Nome
+          per_page: por página
+          roles: Funções
+        nav:
+          attributes: Descrição
+          delete: Remover
+          index: Retornar para gerenciar grupos
+          members: Comercial
+          roles: Funções
+        roles:
+          add: Adicionar
+          label:
+            action: Açao
+            description: Descrição
+            name: Função
+          remove: Remover
+          title:
+            add_group_roles: Adicionar funções ao grupo
+            current_group_roles: Funções de grupo atuais
+        title:
+          add_user: Adicionar usuário ao grupo
+          delete: Remove Group "%{group}"
+          edit: Editar Grupo
+          index: Gerenciar Grupos
+          list_members: Membros atuais do grupo
+          members: Membros do grupo
+          new: Novo grupo
+          reader_index: Ver Grupos
+          remove: Remover grupo
+          roles: Funções de grupo
+      roles:
+        description:
+          admin: Concede acesso irrestrito a este inquilino
+          collection_editor: Pode criar, ler e editar qualquer coleção neste inquilino
+          collection_manager: Pode criar, ler, editar e destruir qualquer coleção neste locatário
+          collection_reader: Pode ler qualquer coleção neste inquilino
+          user_manager: Pode ler, editar, convidar e remover qualquer usuário neste locatário
+          user_reader: Pode ler qualquer usuário neste locatário
+          work_depositor: Pode depositar obras em qualquer Admin Set neste locatário. Pode ler, editar e gerenciar embargos / locações de obras pertencentes a eles
+          work_editor: Pode ler qualquer Admin Set neste inquilino. Além disso, pode criar, ler, editar e aprovar qualquer Trabalho neste inquilino, bem como mover Obras entre Conjuntos de Administradores e gerenciar Embargos e Locações
+      title: Administração
+      work_types: Tipos de trabalho disponíveis
+    footer:
+      admin_login: Login do administrador
+    identity_provider:
+      header: Provedor de identidade de autenticação
+      label:
+        logo_image: Imagem para página SSO
+        logo_image_alt_text: Texto alternativo para imagem
+        name: Nome ou Descrição
+        optoins: Opções
+        provider: Fornecedor
+    proprietor:
+      accounts:
+        nav: Contas
+      users:
+        edit:
+          header: Editando usuário
+        index:
+          confirm_delete: Tem certeza de que deseja excluir este usuário? Essa ação não pode ser desfeita.
+          header: Gerenciar usuários
+          manage: Gerir
+        nav: Comercial
+        show:
+          header: Gerenciar usuário
+          update: Atualizar
+    splash:
+      account_denied: Você não está autorizado a criar inquilinos
+      account_login: Inicie sessão para começar
+      account_signup: Iniciar
+      center_heading: Rico em Recursos
+      center_text: Todos os recursos que você esperaria de um sistema de repositório maduro. Suporta uma variedade de tipos de conteúdo e casos de uso.
+      form:
+        q:
+          label: Pesquise em todos os repositórios
+      left_heading: Fácil
+      left_text: Trabalha para instituições grandes e pequenas, de museus a bibliotecas universitárias. Comece em minutos.
+      right_heading: Flexível
+      right_text: Personalize a interface do usuário para combinar a identidade da marca da sua instituição. Ajude os fluxos de trabalho a combinar a maneira como sua equipe gosta de trabalhar.
+    tagline: A solução de repositório de próxima geração
+    toolbar:
+      profile:
+        edit_registration: Mudar senha
+    users:
+      label:
+        date_joined: Ingressou
+        last_login: Último acesso
+        name: Nome
+        user_key: Nome de usuário
+  hyrax:
+    admin:
+      appearances:
+        show:
+          forms:
+            banner_image:
+              hint: Para usar uma imagem como plano de fundo do cabeçalho, você deve usar uma imagem (JPG, GIF ou PNG) com pelo menos 120 pixels de altura e 1200 pixels de largura. Para obter melhores resultados, use uma imagem com pelo menos 1800 pixels de largura.
+            collection_banner_text_color:
+              hint: A cor do texto (título e data da última atualização) dentro do banner da coleção.
+            custom_css:
+              confirm: CSS personalizado sempre substituirá outras seleções de temas. Continuar?
+              warning: Se suas personalizações de temas não parecem estar sendo aplicadas corretamente, verifique se elas não estão sendo substituídas pelo CSS personalizado.
+            default_button_background_color:
+              hint: Botões de interação do trabalho (editar, recurso, etc.); exibições de trabalho na página de coleção e botão de filtro de pesquisa.
+            default_images:
+              alert: Faça upload de pelo menos um arquivo antes de enviar.
+              hint: Para imagens padrão, você deve usar uma imagem (JPG, GIF ou PNG) que tenha dimensões iguais de altura e largura (100 pixels de largura e 100 pixels de altura)
+            directory_image:
+              hint: A imagem do diretório deve usar uma imagem (JPG, GIF ou PNG). A largura da imagem não deve ser maior que 2x a altura.
+            facet_panel_background_color:
+              hint: Aplica-se a facetas e cabeçalhos de seção adicionais nas páginas de trabalho em alguns temas.
+            facet_panel_text_color:
+              hint: Aplica-se também à cor do cursor ao lado do texto e ao título da obra em alguns temas.
+            favicon:
+              hint: Os favicons precisam ser arquivos png e devem ser quadrados. O tamanho máximo usado é 228px x 228px.
+            link_color:
+              hint: 'Afeta links nas páginas inicial e de trabalho, incluindo: breadcrumbs, guias, títulos e termos de serviço.'
+            logo_image:
+              hint: Para usar uma imagem como logotipo, use uma imagem (JPG, GIF ou PNG) que não seja mais alta que o cabeçalho e que não tenha mais que 400 pixels de largura.
+            navbar_background_color:
+              hint: Com 40% de opacidade.
+            navbar_link_background_color:
+              hint: Aplica-se à cor de fundo dos botões Página inicial, Sobre, Contato e Ajuda
+            navbar_link_background_hover_color:
+              hint: Aplica-se apenas aos botões Início, Sobre, Contato e Ajuda nessas páginas específicas (com 15% de opacidade).
+            primary_button_hover_color:
+              hint: Botões de compartilhamento, pesquisa e interação de coleção (editar, recurso, etc.). A borda desses botões também será dessa cor.
+            themes:
+              confirm: Se o seu tema não parece estar sendo aplicado corretamente, verifique se ele não está sendo substituído pelo CSS personalizado.
+          hints:
+            banner_image: Para usar uma imagem como um fundo de masthead, você deve usar uma imagem (JPG, GIF ou PNG) com pelo menos 120 pixels de altura e 1200 pixels de largura. Para obter melhores resultados, use uma imagem de pelo menos 1800 pixels de largura.
+            default_image: Para imagens padrão, você deve usar uma imagem (JPG, GIF ou PNG) que tenha dimensões de altura e largura iguais (100 pixels de largura e 100 pixels de altura)
+            directory_image: Para usar uma imagem como a imagem de diretório, você deve usar uma imagem (JPG, GIF ou PNG) que não seja mais alta que o cabeçalho e não tenha mais de 400 pixels de largura.
+            favicon: Os favicons precisam ser arquivos png e devem ser quadrados. O tamanho máximo usado é 228px x 228px.
+            logo_image: Para usar uma imagem como logotipo, você deve usar uma imagem (JPG, GIF ou PNG) que não seja mais alta que o cabeçalho e não tenha mais de 400 pixels de largura.
+          tabs:
+            banner_image: Imagem do banner
+            colors: Cores
+            custom_css: CSS customizado
+            default_images: Imagens padrão
+            directory_image: Imagem do diretório
+            favicon: favicon
+            fonts: Fontes
+            themes: Temas
+      roles_service_jobs:
+        header: Trabalhos de reparo de dados
+        jobs:
+          create_admin_set_accesses:
+            description: A criação de um registro Hyrax::PermissionTemplateAccess (combinado com Ability#user_groups) permitirá que Works em todos os AdminSets apareçam em consultas Blacklight/Solr.
+            label: Criar acessos ao conjunto de administradores
+          create_collection_accesses:
+            description: Como cada função de coleção tem algum nível de acesso a cada coleção dentro de um locatário, criar um registro Hyrax::PermissionTemplateAccess (combinado com Ability#user_groups) significa que todas as coleções aparecerão nas consultas Blacklight/Solr.
+            label: Criar acessos à coleção
+          create_collection_type_participants:
+            description: Como algumas das funções de coleção têm acesso a todas as coleções dentro de um locatário, crie um registro Hyrax::CollectionTypeParticipant para elas em cada Hyrax::CollectionType (exceto AdminSet)
+            label: Criar participantes do tipo de coleção
+          grant_workflow_roles_for_all_admin_sets:
+            description: 'As permissões para depositar trabalhos são controladas por funções de fluxo de trabalho em AdminSets individuais. Para que os registros Hyrax::Group e User que possuem a função ''Editor de trabalho'' ou ''Depositador de trabalho'' tenham as permissões corretas para Works, concedemos a eles funções de fluxo de trabalho para todos os AdminSets. NOTA: Todos os AdminSets devem ter um modelo de permissão ou isso falhará. Execute ''Criar acessos ao conjunto de administradores'' primeiro.'
+            label: Administrador definir funções de fluxo de trabalho
+      sidebar:
+        accounts: Contas
+        activity_summary: Resumo da atividade
+        labels: Etiquetas
+        manage_groups: Gerenciar grupos
+        roles_service_jobs: Reparo de dados
+        system_status: Status do sistema
+      users:
+        activate:
+          confirmation: Tem certeza de que deseja ativar o usuário "%{user}"?
+          failure: O usuário "%{user}" não pôde ser ativado.
+          success: O usuário "%{user}" foi ativado com sucesso.
+        destroy:
+          confirmation: Tem certeza de que deseja excluir o usuário "%{user}"? Esta ação é irreversível.
+          failure: O usuário "%{user}" não pôde ser excluído.
+          success: O usuário "%{user}" foi excluído com sucesso.
+        index:
+          action_label: Açao
+          add: Convidar Usuário
+          delete: Excluir
+          invite_users: Adicionar ou Convidar usuário por email
+          status:
+            active: Ativo
+            pending: Pendente
+          status_label: Status
+        roles:
+          remove:
+            confirmation: Tem certeza de que deseja remover a função "%{role}" do usuário "%{user}"?
+  permissions:
+    collections:
+      cannot:
+        manage_discovery: Você não tem permissão para alterar a configuração de descoberta desta coleção
+  proprietor:
+    accounts:
+      edit:
+        account_settings: Configurações de conta
+        data_cite_endpoint: Terminal DataCite
+        fcrepo_endpoint: Ponto de extremidade do Fedora
+        header: Editando conta
+        solr_endpoint: Ponto final do Solr
+      index:
+        cname: CNAME
+        confirm_delete: Tem certeza de que deseja excluir este repositório? TODAS AS COLEÇÕES E TRABALHOS dentro deste repositório serão EXCLUÍDOS PERMANENTEMENTE
+        create_new: Criar nova conta
+        header: Contas
+        manage: Gerir
+        tenant: Locatário (UUID)
+      new:
+        header: Crie um novo repositório
+      show:
+        add: Adicionar
+        current_admins:
+          actions: Açao
+          all_users: Todos os usuários
+          email: Endereço de e-mail
+          header: Administradores de conta corrente
+          no_admins: Não existem administradores
+        edit: Editar conta
+        header: Gerenciar conta
+        remove: Remover
+        update: Atualizar
+    users:
+      edit:
+        header: Editar usuário
+      index:
+        actions: Ações
+        affiliation: Afiliação
+        confirm_delete: Tem certeza de que deseja excluir este usuário?
+        create_new: Crie um novo
+        department: Departamento
+        display_name: Mostrar nome
+        email: Email
+        header: Gerenciar usuários
+        manage: Gerir
+        title: Título
+        view_users: Ver usuários
+      new:
+        header: Crie um novo usuário
+      show:
+        add: Adicionar
+        edit: Editar
+        header: Gerenciar usuário
+        update: Atualizar
+  single_signon:
+    index:
+      sign_in_with_provider: Faça login com %{provider}
+  status:
+    index:
+      services: Serviços
+    service:
+      down: Baixa
+      ok: Está bem

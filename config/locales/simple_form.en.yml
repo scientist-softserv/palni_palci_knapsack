@@ -1,0 +1,77 @@
+---
+en:
+  simple_form:
+    cancel: Cancel
+    error_notification:
+      default_message: 'Please review the problems below:'
+    hints:
+      account:
+        admin_emails: Enter one email address at a time
+        is_public: 'Can users discover your site on the home page or access your pages without a special username / password?'
+        fcrepo_endpoint:
+          base_path: Fedora base path should begin with a slash AND not end with a slash
+          url: Fedora URL should not end with a slash
+        name: A single or hyphenated name used for technical aspects of the repository (e.g., "acme" or "acme-library").
+        gtm_id: The ID of your Google Tag Manager account
+        google_analytics_id: The ID of your Google Analytics account
+        contact_email_to: The email address that messages submitted via the contact page are sent to
+        weekly_email_list: List of email addresses to email the weekly report. Leave a single space between each email
+        monthly_email_list: List of email addresses to email the monthly report. Leave a single space between each email
+        yearly_email_list: List of email addresses to email the yearly report. Leave a single space between each email
+        email_format: Set a list of email domains that are allowed sign up to this repository e.g (@ubiquitypress.com @gmail.com). Leave a single space between each domain.
+        allow_signup: Allow users to sign up to your repository
+        enable_oai_metadata: Enable or disable OAI link
+        shared_login: Enable or disable shared login
+        file_size_limit: This should be set to at least 536870912000
+        locale_name: |
+          The name of the tenant specific locale suffix added to their locale.yml files. Only alphabetic characters should be added, no symbols or numbers, these will then be capitalised.
+        oai_admin_email: OAI endpoint contact email address
+        doi_reader: Show ability to read from Datacite to populate records. WIP do not use
+        doi_writer: Write DOIs for records. WIP do not use
+        cache_api: Turns on cache for API endpoints. Experimental
+        email_subjet_prefix: String to put in front of system email subjects.
+        contact_email: The email address that system notifications will be sent from. Additional configuration is required to add an address from domains other than the site's domain
+        geonames_username: Register at http://www.geonames.org/manageaccount
+        file_acl: Turn off if using a file system like samba or nfs that does not support setting access control lists
+        ssl_configured: Set it true if using https
+      hyku_group:
+        description: A brief summary of the role of the group
+      user:
+        email: Enter one email address at a time. You may also resend an invitation via this form. Roles only apply to this tenant.
+    labels:
+      account:
+        admin_emails: Add or invite new administrator (via email)
+        cname: Primary Domain Name
+        fcrepo_endpoint:
+          base_path: Base Path
+          url: URL
+        name: Short name
+        solr_endpoint:
+          url: URL
+        tenant: Tenant UUID
+        gtm_id: Google tag manager
+      add_user_to_group:
+        user_ids: User ID
+      defaults:
+        admin_note: Administrative Notes
+      domain_names:
+        cname: Domain Name
+      group_search:
+        q: Search
+      hyku_group:
+        description: Description
+      page_size:
+        per: Show
+      user:
+        display_name: Your Name
+        email: Email address
+      user_search:
+        uq: Search for User
+    'no': 'No'
+    placeholders:
+      user_search:
+        uq: Name or username
+    required:
+      mark: "*"
+      text: required
+    'yes': 'Yes'

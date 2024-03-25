@@ -1,0 +1,9 @@
+---
+zh:
+  hyrax:
+    icons:
+      cdl: fa fa-file-text-o
+    select_type:
+      cdl:
+        description: CDL 作品
+        name: CDL

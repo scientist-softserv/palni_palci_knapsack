@@ -1,0 +1,12 @@
+---
+en:
+  hyrax:
+    icons:
+      image: fa fa-picture-o
+    select_type:
+      image:
+        description: Single or multi-page image works.
+        name: Image
+    image:
+      labels:
+        admin_note: "Administrative Notes"

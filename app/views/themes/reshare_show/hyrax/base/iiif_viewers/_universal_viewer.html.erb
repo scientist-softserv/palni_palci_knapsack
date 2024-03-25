@@ -1,0 +1,7 @@
+<div class="viewer-wrapper">
+  <iframe aria-label="image view"
+    src="<%= universal_viewer_base_url %>#?manifest=<%= main_app.polymorphic_url [main_app, :manifest, presenter], { locale: nil } %>&config=<%= "#{request&.base_url}/uv/uv-config-reshare.json" %>"
+    allowfullscreen="true"
+    frameborder="0"
+  ></iframe>
+</div>

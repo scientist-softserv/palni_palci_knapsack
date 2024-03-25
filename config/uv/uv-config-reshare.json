@@ -1,0 +1,19 @@
+{
+  "modules": {
+    "footerPanel": {
+      "options": {
+        "downloadEnabled": false,
+        "shareEnabled": false
+      }
+    },
+    "pagingHeaderPanel": {
+      "options": {
+        "autoCompleteBoxEnabled": false,
+        "galleryButtonEnabled": true,
+        "imageSelectionBoxEnabled": true,
+        "pageModeEnabled": false,
+        "pagingToggleEnabled": true
+      }
+    }
+  }
+}
