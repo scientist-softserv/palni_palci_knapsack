@@ -1,0 +1,81 @@
+<%# OVERRIDE Hyku for pals custom splash page - remove jumbotron content %>
+
+<% content_for :page_title, application_name %>
+<% content_for(:container_class) { 'row' } %>
+<section id="banner">
+  <div class="splash-logo">
+  </div>
+  <div class="">
+    <h1>Collaborative Repository</h1>
+    <h3 class="splash-page">
+      Welcome to our shared repository, where you'll find scholarly research, cultural heritage items,
+      educational materials, and more from libraries across PALNI, PALCI, and other <a href="http://hykuforconsortia.org/" target="_blank">Hyku for Consortia</a> partners.
+    </h3>
+    <h3 class="splash-page">
+      Visit our public repositories one at a time by clicking on the icons below.
+    </h3>
+  </div>
+</section>
+
+<section class="product-features">
+  <%# SEARCH BAR FOR HOME PAGE %>
+  <%= render partial: 'splash/search_form' %>
+  <h2>Browse our partner repositories:</h2>
+  <div class="row grid-row accounts-row">
+    <% @accounts.each_with_index do |account, i| %>
+      <% if @images[i].present? && !@images[i].match(/placeholder/) %>
+        <%= link_to "//#{account.cname}" do %>
+          <%= image_tag @images[i], alt_text: @alt_text[i], class: 'logo-image' %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</section>
+
+<section class="partnering-consortia">
+  <h3>Partnering consortia:</h3>
+  <div class="consortia-logos">
+    <%= link_to image_tag("palci.png", alt: "PALCI logo", class: "img-responsive"), "https://palci.org/", target: "_blank" %>
+
+    <%= link_to image_tag("palni.png", alt: "PALNI logo", class: "img-responsive"), "https://palni.org/", target: "_blank" %>
+
+    <%= link_to image_tag("louis.png", alt: "LOUIS logo", class: "img-responsive"), "https://www.louislibraries.org/", target: "_blank" %>
+
+    <%= link_to image_tag("viva.png", alt: "VIVA logo", class: "img-responsive"), "https://vivalib.org/", target: "_blank" %>
+  </div>
+</section>
+
+<section class="splash-footer">
+  <p>
+    This project was made possible in part by the Institute of Museum and Library Services, LG-36-19-0108, as well as other funding sources.
+  </p>
+  <div class="imls-logo">
+    <%= image_tag "imls.jpg", alt: "IMLS logo", class: "img-responsive imls-logo" %>
+  </div>
+  <nav class="splash-footer-links">
+    <ul>
+      <% if admin_host? && !user_signed_in? %>
+        <li>
+          <p><%= link_to t('hyku.footer.admin_login', default: [:'hyrax.toolbar.profile.login']), main_app.new_user_session_path %></p>
+        </li>
+      <% end %>
+      <li><%= link_to "About", "https://www.hykuforconsortia.org", target: "blank" %></li>
+      <li><%= mail_to "consortial-ir@palci.org", "Contact" %></li>
+    </ul>
+    <div class="container-fluid">
+      <div class="navbar-text text-left">
+        <p><%= t('hyrax.footer.service_html') %></p>
+        <p>Hyku v<%= Hyku::VERSION %></p>
+      </div>
+      <div class="navbar-right">
+        <div class="navbar-text text-right">
+          <p><%= t('hyrax.footer.copyright_html', current_year: Time.now.year) %></p>
+          <p><%= t('hyrax.background_attribution_html') %></p>
+        </div>
+        <div class="navbar-text text-right">
+          <p><a href="https://hykuforconsortia.palni.org/privacy" target="_blank">Privacy Policy</a></p>
+        </div>
+      </div>
+    </div>
+  </nav>
+</section>
