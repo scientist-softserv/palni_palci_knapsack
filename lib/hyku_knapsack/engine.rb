@@ -32,17 +32,19 @@ module HykuKnapsack
     config.before_initialize do
       config.i18n.load_path += Dir["#{config.root}/config/locales/**/*.yml"]
 
-      #if Hyku::Application.respond_to?(:user_devise_parameters=)
-      #  Hyku::Application.user_devise_parameters = %i[
-      #    database_authenticatable
-      #    invitable
-      #    recoverable
-      #    rememberable
-      #    trackable
-      #    validatable
-      #    omniauthable
-      #  ]
-      #end
+      if Hyku::Application.respond_to?(:user_devise_parameters=)
+        Hyku::Application.user_devise_parameters = [
+          :database_authenticatable,
+          :invitable,
+          omniauth_providers: %i[saml openid_connect cas],
+          :omniauthable,
+          :recoverable,
+          :registerable,
+          :rememberable,
+          :trackable,
+          :validatable
+          ]
+      end
     end
 
     config.after_initialize do
