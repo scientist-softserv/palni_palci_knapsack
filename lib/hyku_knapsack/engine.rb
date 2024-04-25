@@ -9,19 +9,19 @@ module HykuKnapsack
         I18n.load_path << path.to_s
       end
 
-      # Let's have unique load_paths.  Later entries in the I18n.load_path array take precendence
-      # over earlier entries (e.g. lower array index means lower precedence).  So we need to reverse
+      # Let's have unique load_paths. Later entries in the I18n.load_path array take precedence
+      # over earlier entries (e.g. lower array index means lower precedence). So we need to reverse
       # the array, then call uniq (which will drop duplicates that show up later in the array).
-      # Then reverse again.  (You know, kind of like an Uno reverse battle.)
+      # Then reverse again. (You know, kind of like an Uno reverse battle.)
       I18n.load_path = I18n.load_path.reverse.uniq.reverse
       I18n.backend.reload!
     end
 
     initializer :append_migrations do |app|
-      # only add the migrations if they are not already copied
+      # Only add the migrations if they are not already copied
       # via the rake task. Allows gem to work both with the install:migrations
       # and without it.
-      if !app.root.to_s.match(root.to_s) &&
+      if !app.root.to_s.match(HykuKnapsack::Engine.root.to_s) &&
          app.root.join('db/migrate').children.none? { |path| path.fnmatch?("*.hyku_knapsack.rb") }
         config.paths["db/migrate"].expanded.each do |expanded_path|
           app.config.paths["db/migrate"] << expanded_path
@@ -30,24 +30,27 @@ module HykuKnapsack
     end
 
     config.before_initialize do
+      # Adding translation files to the load path
       config.i18n.load_path += Dir["#{config.root}/config/locales/**/*.yml"]
 
+      # Setting up Devise parameters if the application has the user_devise_parameters method
       if Hyku::Application.respond_to?(:user_devise_parameters=)
-        Hyku::Application.user_devise_parameters = [
-          :database_authenticatable,
-          :invitable,
-          omniauth_providers: %i[saml openid_connect cas],
-          :omniauthable,
-          :recoverable,
-          :registerable,
-          :rememberable,
-          :trackable,
-          :validatable
-          ]
+        Hyku::Application.user_devise_parameters = {
+          database_authenticatable: {},
+          invitable: {},
+          omniauth_providers: [:saml, :openid_connect, :cas],
+          omniauthable: {},
+          recoverable: {},
+          registerable: {},
+          rememberable: {},
+          trackable: {},
+          validatable: {}
+        }
       end
     end
 
     config.after_initialize do
+      # Loading decorators for caching or dynamic evaluation depending on configuration
       HykuKnapsack::Engine.root.glob("app/**/*_decorator*.rb").sort.each do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
@@ -62,7 +65,6 @@ module HykuKnapsack
       #
       # https://github.com/scientist-softserv/adventist-dl/blob/97bd05946345926b2b6c706bd90e183a9d78e8ef/config/application.rb#L68-L73
       Hyrax::DerivativeService.services = [
-        # Adventist::TextFileTextExtractionService,
         IiifPrint::PluggableDerivativeService
       ]
 
