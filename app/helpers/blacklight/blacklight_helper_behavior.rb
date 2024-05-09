@@ -4,12 +4,12 @@
 # Methods added to this helper will be available to all templates in the hosting application
 module Blacklight
   module BlacklightHelperBehavior
-    include BlacklightUrlHelper
-    include BlacklightConfigurationHelper
-    include HashAsHiddenFieldsHelper
-    include RenderConstraintsHelper
-    include RenderPartialsHelper
-    include FacetsHelper
+    include Blacklight::UrlHelperBehavior
+    include Blacklight::ConfigurationHelperBehavior
+    include Blacklight::HashAsHiddenFieldsHelperBehavior
+    include Blacklight::RenderConstraintsHelperBehavior
+    include Blacklight::RenderPartialsHelperBehavior
+    include Blacklight::FacetsHelperBehavior
     extend Deprecation
     self.deprecation_horizon = 'Blacklight version 7.0.0'
 
