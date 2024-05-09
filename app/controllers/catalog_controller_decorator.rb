@@ -14,6 +14,10 @@ end
 
 CatalogController.prepend(CatalogControllerDecorator)
 
+def solr_name(*args)
+  ActiveFedora.index_field_mapper.solr_name(*args)
+end
+
 CatalogController.configure_blacklight do |config|
   # We need need to clear the facet fields that are already declared in the
   # catalog controller; if we do not, we'll encounter exceptions regarding
