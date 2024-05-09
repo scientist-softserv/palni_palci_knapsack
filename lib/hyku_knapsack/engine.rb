@@ -35,17 +35,17 @@ module HykuKnapsack
 
       # Setting up Devise parameters if the application has the user_devise_parameters method
       if Hyku::Application.respond_to?(:user_devise_parameters=)
-        Hyku::Application.user_devise_parameters = {
-          database_authenticatable: {},
-          invitable: {},
-          omniauth_providers: [:saml, :openid_connect, :cas],
-          omniauthable: {},
-          recoverable: {},
-          registerable: {},
-          rememberable: {},
-          trackable: {},
-          validatable: {}
-        }
+        Hyku::Application.user_devise_parameters = [
+          :database_authenticatable,
+          :invitable,
+          :omniauthable,
+          :recoverable,
+          :registerable,
+          :rememberable,
+          :trackable,
+          :validatable,
+          omniauth_providers: [:saml, :openid_connect, :cas]
+        ]
       end
     end
 
@@ -59,26 +59,12 @@ module HykuKnapsack
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
 
-      # By default plain text files are not processed for text extraction.  In adding
-      # Adventist::TextFileTextExtractionService to the beginning of the services array we are
-      # enabling text extraction from plain text files.
-      #
-      # https://github.com/scientist-softserv/adventist-dl/blob/97bd05946345926b2b6c706bd90e183a9d78e8ef/config/application.rb#L68-L73
+      # Here we make the text extraction service for plain text files the first choice
       Hyrax::DerivativeService.services = [
         IiifPrint::PluggableDerivativeService
       ]
 
-      # This is the opposite of what you usually want to do.  Normally app views override engine
-      # views but in our case things in the Knapsack override what is in the application.
-      # Furthermore we need to account for when the ApplicationController and it's descendants set
-      # their individual view_paths.  By looping through all descendants, we ensure that we have
-      # the Knapsack views at the beginning of the list of view_paths.
-      #
-      # In the load sequence, when we load ApplicationController, we establish the view_path for all
-      # future descendants.  When we then encounter a descendant, we copy the
-      # ApplicationController's view_path to the descendant; then later after we've encountered most
-      # all of the descendants we updated the ApplicationController's view_path, but that does not
-      # propogate to the descendants' copied view_path.
+      # Override engine views with application views and adjust the view paths accordingly
       ([::ApplicationController] + ::ApplicationController.descendants).each do |klass|
         paths = klass.view_paths.collect(&:to_s)
         paths = [HykuKnapsack::Engine.root.join('app', 'views').to_s] + paths
@@ -86,12 +72,7 @@ module HykuKnapsack
       end
       ::ApplicationController.send :helper, HykuKnapsack::Engine.helpers
 
-      ##
-      # Ensure that all knapsack locales are the "first choice" of keys.  We've already done this in
-      # the catalog controller to appease the Blacklight constraint of having translations loaded.
-      # However, between loading those translations in the catalog controller and now, the
-      # underlying application and even other engines might have further amended the load path.
-      # This is our "best" chance to do it at the latest possible moment.
+      # Ensure translations are prioritized last after all initializations
       HykuKnapsack::Engine.load_translations!
     end
   end
