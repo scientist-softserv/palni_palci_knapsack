@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ActiveJobTenant
+module ActiveJobTenantDecorator
   extend ActiveSupport::Concern
 
   included do
@@ -59,3 +59,5 @@ module ActiveJobTenant
       end
     end
 end
+
+ActiveJobTenant.prepend(ActiveJobTenantDecorator)
