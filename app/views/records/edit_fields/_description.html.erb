@@ -4,7 +4,7 @@
   <%= f.input :description,
       as: :multi_value,
       label: label_for(term: :description, record_class: f.object.class),
-      hint: hint_for(term: :description, record_class: f.object..class),
+      hint: hint_for(term: :description, record_class: f.object.class),
       input_html: { rows: '14', type: 'textarea' },
       required: f.object.required?(key) %>
 <% else %>
