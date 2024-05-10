@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Hyku::Application do
+RSpec.describe HykuKnapsack::ApplicationHelper do
   describe ".cross_tenant_search_url" do
     subject { described_class.cross_tenant_search_url }
 
