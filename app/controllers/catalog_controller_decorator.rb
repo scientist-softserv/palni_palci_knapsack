@@ -58,6 +58,8 @@ CatalogController.configure_blacklight do |config|
   config.add_index_field solr_name('audience', :stored_searchable), label: "Audience"
   config.add_index_field solr_name('discipline', :stored_searchable), label: "Discipline"
 
+  config.show_fields.clear
+  
   config.add_show_field solr_name('admin_note', :stored_searchable), label: "Administrative Notes"
   config.add_show_field solr_name("alternative_title", :stored_searchable), label: "Alternative title"
   config.add_show_field solr_name("related_url", :stored_searchable)
@@ -105,9 +107,9 @@ CatalogController.configure_blacklight do |config|
     { name: 'size', label: 'Size' },
     { name: 'table_of_contents', label: 'Table of Contents' }
   ]
-  config.search_fields.delete('all_fields')
 
   search_fields_without_customization.each do |search_field|
+    config.search_fields.delete(search_field[:name])
     config.add_search_field(search_field[:name]) do |field|
       field.label = search_field[:label]
       field.solr_parameters = { "spellcheck.dictionary": search_field[:name] }
@@ -120,6 +122,7 @@ CatalogController.configure_blacklight do |config|
   end
 
   # If there is something additional about a search field that needs to be customized i.e. whether to include in advanced search, or if it needs a different solr name, add it below
+  config.search_fields.delete('date')
   config.add_search_field('date') do |field|
     solr_name = 'date_ssi'
     field.include_in_advanced_search = false
@@ -134,6 +137,8 @@ CatalogController.configure_blacklight do |config|
   # whether the sort is ascending or descending (it must be asc or desc
   # except in the relevancy case).
   # label is key, solr field is value
+  config.sort_fields.clear
+
   config.add_sort_field "title_ssi asc", label: "title (A-Z)"
   config.add_sort_field "title_ssi desc", label: "title (Z-A)"
   config.add_sort_field "date_ssi desc", label: "date created \u25BC"
