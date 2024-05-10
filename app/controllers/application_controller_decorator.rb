@@ -46,6 +46,7 @@ module ApplicationControllerDecorator
 
   # rubocop:disable Metrics/AbcSize
   def global_request_logging
+    FileUtils.mkdir_p(Rails.root.join('log')) unless Dir.exist?(Rails.root.join('log'))
     rl = ActiveSupport::Logger.new('log/request.log')
     if request.host&.match('blc.hykucommons')
       http_request_header_keys = request.headers.env.keys.select { |header_name| header_name.match("^HTTP.*|^X-User.*") }
@@ -81,13 +82,13 @@ module ApplicationControllerDecorator
   # rubocop:enable Metrics/AbcSize
 
 
-  def set_raven_context
-    Raven.user_context(id: session[:current_user_id]) # or anything else in session
-    Raven.extra_context(params: params.to_unsafe_h, url: request.url)
+  def set_sentry_context
+    Sentry.set_user(id: session[:current_user_id])  # Set user context
+    Sentry.set_extras(params: params.to_unsafe_h, url: request.url)  # Set extra context
   end
 end
 
-ApplicationController.before_action :set_raven_context
+ApplicationController.before_action :set_sentry_context
 ApplicationController.before_action :global_request_logging
 
 ApplicationController.prepend(ApplicationControllerDecorator)
