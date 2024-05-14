@@ -1,0 +1,78 @@
+---
+fr:
+  simple_form:
+    cancel: Annuler
+    error_notification:
+      default_message: 'Veuillez examiner les problèmes ci-dessous :'
+    hints:
+      account:
+        admin_emails: Entrez une adresse e-mail à la fois
+        allow_signup: Autoriser les utilisateurs à s'inscrire à votre dépôt
+        cache_api: Active le cache pour les points d'accès API. Expérimental
+        contact_email: L'adresse e-mail à partir de laquelle les notifications système seront envoyées. Une configuration supplémentaire est nécessaire pour ajouter une adresse provenant de domaines autres que le domaine du site
+        contact_email_to: L'adresse e-mail à laquelle les messages soumis via la page de contact sont envoyés
+        doi_reader: Afficher la capacité à lire depuis Datacite pour remplir les enregistrements. WIP ne pas utiliser
+        doi_writer: Écrire des DOIs pour les enregistrements. WIP ne pas utiliser
+        email_format: Définissez une liste de domaines de messagerie autorisés à s'inscrire à ce dépôt, par exemple (@ubiquitypress.com @gmail.com). Laissez un espace entre chaque domaine.
+        email_subjet_prefix: Chaîne à mettre devant les sujets des e-mails système.
+        enable_oai_metadata: Activer ou désactiver le lien OAI
+        fcrepo_endpoint:
+          base_path: Le chemin de base de Fedora doit commencer par un slash et ne PAS se terminer par un slash
+          url: L'URL de Fedora ne doit pas se terminer par un slash
+        file_acl: Désactivez si vous utilisez un système de fichiers comme samba ou nfs qui ne prend pas en charge les listes de contrôle d'accès
+        file_size_limit: Ceci doit être réglé à au moins 536870912000
+        geonames_username: Inscrivez-vous sur http://www.geonames.org/manageaccount
+        google_analytics_id: L'ID de votre compte Google Analytics
+        gtm_id: L'ID de votre compte Google Tag Manager
+        is_public: Les utilisateurs peuvent-ils découvrir votre site sur la page d'accueil ou accéder à vos pages sans identifiant/mot de passe spécifique?
+        locale_name: 'Le nom du suffixe de locale spécifique au locataire ajouté à leurs fichiers locale.yml. Seuls les caractères alphabétiques doivent être ajoutés, pas de symboles ou de chiffres, ceux-ci seront alors mis en majuscule.
+
+          '
+        monthly_email_list: Liste des adresses e-mail pour envoyer le rapport mensuel. Laissez un espace entre chaque e-mail
+        name: Un nom simple ou avec des tirets utilisé pour les aspects techniques du dépôt (par exemple, "acme" ou "acme-bibliothèque").
+        oai_admin_email: Adresse e-mail de contact du point d'accès OAI
+        shared_login: Activer ou désactiver la connexion partagée
+        ssl_configured: Mettez-le sur vrai si vous utilisez https
+        weekly_email_list: Liste des adresses e-mail pour envoyer le rapport hebdomadaire. Laissez un espace entre chaque e-mail
+        yearly_email_list: Liste des adresses e-mail pour envoyer le rapport annuel. Laissez un espace entre chaque e-mail
+      hyku_group:
+        description: Un bref résumé du rôle du groupe
+      user:
+        email: Entrez une adresse e-mail à la fois. Vous pouvez également renvoyer une invitation via ce formulaire. Les rôles ne s'appliquent qu'à ce locataire.
+    labels:
+      account:
+        admin_emails: Ajouter ou inviter un nouvel administrateur (par e-mail)
+        cname: Nom de domaine principal
+        fcrepo_endpoint:
+          base_path: Chemin de base
+          url: URL
+        gtm_id: Google Tag Manager
+        name: Nom court
+        solr_endpoint:
+          url: URL
+        tenant: UUID du locataire
+      add_user_to_group:
+        user_ids: ID utilisateur
+      defaults:
+        admin_note: Notes administratives
+      domain_names:
+        cname: Nom de domaine
+      group_search:
+        q: Recherche
+      hyku_group:
+        description: Description
+      page_size:
+        per: Afficher
+      user:
+        display_name: Votre nom
+        email: Adresse e-mail
+      user_search:
+        uq: Recherche d'utilisateur
+    'no': Non
+    placeholders:
+      user_search:
+        uq: Nom ou nom d'utilisateur
+    required:
+      mark: "*"
+      text: requis
+    'yes': Oui

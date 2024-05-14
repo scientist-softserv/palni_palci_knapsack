@@ -51,8 +51,8 @@ RSpec.describe 'Create a Etd', type: :feature, js: true, clean: true, cohort: 'b
       expect(page).to have_content "Add files"
       expect(page).to have_content "Add folder"
       within('div#add-files') do
-        attach_file("files[]", Rails.root.join('spec', 'fixtures', 'images', 'image.jp2'), visible: false)
-        attach_file("files[]", Rails.root.join('spec', 'fixtures', 'images', 'jp2_fits.xml'), visible: false)
+        attach_file("files[]", Rails.root.join('spec', 'fixtures', 'hyrax', 'image.jp2'), visible: false)
+        attach_file("files[]", Rails.root.join('spec', 'fixtures', 'hyrax', 'jp2_fits.xml'), visible: false)
       end
       expect(page).to have_selector(:link_or_button, 'Delete') # Wait for files to finish uploading
 
