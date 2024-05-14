@@ -13,7 +13,7 @@ RSpec.describe 'Etd show page', type: :feature, js: true, clean: true, cohort: '
     FactoryBot.create(:editors_group)
     FactoryBot.create(:depositors_group)
 
-    admin_set_id = AdminSet.find_or_create_default_admin_set_id
+    admin_set_id = Hyrax::AdminSetCreateService.find_or_create_default_admin_set.id.to_s
     permission_template = Hyrax::PermissionTemplate.find_or_create_by!(source_id: admin_set_id)
     Sipity::Workflow.create!(active: true, name: 'test-workflow', permission_template: permission_template)
 

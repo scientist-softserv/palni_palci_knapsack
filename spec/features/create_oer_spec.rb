@@ -10,7 +10,7 @@ RSpec.feature 'Create a Oer', type: :feature, js: true, clean: true, cohort: 'al
 
   context 'a logged in user with the :work_depositor role' do
     let(:user) { create(:user, roles: [:work_depositor]) }
-    let(:admin_set_id) { AdminSet.find_or_create_default_admin_set_id }
+    let(:admin_set_id) { Hyrax::AdminSetCreateService.find_or_create_default_admin_set.id.to_s }
     let(:permission_template) { Hyrax::PermissionTemplate.find_or_create_by!(source_id: admin_set_id) }
     let(:workflow) do
       Sipity::Workflow.create!(
