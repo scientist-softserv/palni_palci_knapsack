@@ -7,6 +7,8 @@ Hyrax.config do |config|
   # config.register_curation_concern :oer
   # Injected via `rails g hyrax:work Etd`
   config.register_curation_concern :etd
+  # Injected via `rails g hyrax:work_resource EtdResource`
+  config.register_curation_concern :etd_resource
   # # Injected via `rails g hyrax:work Cdl`
   # config.register_curation_concern :cdl
 
