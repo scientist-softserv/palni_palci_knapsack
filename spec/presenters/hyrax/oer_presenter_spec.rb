@@ -211,9 +211,9 @@ RSpec.describe Hyrax::OerPresenter do
     context "when user does not have depositable collections" do
       let(:user_collections) { nil }
 
-      context "and user can create a collection" do
+      context "and user can create a collection resource" do
         before do
-          allow(ability).to receive(:can?).with(:create_any, Collection).and_return(true)
+          allow(ability).to receive(:can?).with(:create_any, CollectionResource).and_return(true)
         end
 
         it "returns true" do
@@ -221,9 +221,9 @@ RSpec.describe Hyrax::OerPresenter do
         end
       end
 
-      context "and user can NOT create a collection" do
+      context "and user can NOT create a collection resource" do
         before do
-          allow(ability).to receive(:can?).with(:create_any, Collection).and_return(false)
+          allow(ability).to receive(:can?).with(:create_any, CollectionResource).and_return(false)
         end
 
         it "returns false" do
