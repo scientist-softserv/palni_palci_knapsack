@@ -34,19 +34,19 @@ module HykuKnapsack
       config.i18n.load_path += Dir["#{config.root}/config/locales/**/*.yml"]
 
       # Setting up Devise parameters if the application has the user_devise_parameters method
-      if Hyku::Application.respond_to?(:user_devise_parameters=)
-        Hyku::Application.user_devise_parameters = [
-          :database_authenticatable,
-          :invitable,
-          :omniauthable,
-          :recoverable,
-          :registerable,
-          :rememberable,
-          :trackable,
-          :validatable,
-          omniauth_providers: [:saml, :openid_connect, :cas]
-        ]
-      end
+      # if Hyku::Application.respond_to?(:user_devise_parameters=)
+      #   Hyku::Application.user_devise_parameters = [
+      #     :database_authenticatable,
+      #     :invitable,
+      #     :omniauthable,
+      #     :recoverable,
+      #     :registerable,
+      #     :rememberable,
+      #     :trackable,
+      #     :validatable,
+      #     omniauth_providers: [:saml, :openid_connect, :cas]
+      #   ]
+      # end
     end
 
     config.after_initialize do
@@ -59,7 +59,6 @@ module HykuKnapsack
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
 
-      # Here we make the text extraction service for plain text files the first choice
       Hyrax::DerivativeService.services = [
         IiifPrint::PluggableDerivativeService
       ]
