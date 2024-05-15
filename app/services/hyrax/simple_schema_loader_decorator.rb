@@ -10,4 +10,4 @@ module Hyrax
   end
 end
 
-Hyrax::SimpleSchemaLoader.prepend(Hyrax::SimpleSchemaLoaderDecorator)
+# This decorator being prepended in a before_initialize in engine.rb to ensure it's loaded first
