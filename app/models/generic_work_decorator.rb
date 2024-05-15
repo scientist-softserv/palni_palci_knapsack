@@ -2,7 +2,8 @@
 
 module GenericWorkDecorator
   extend ActiveSupport::Concern
-  included do
+
+  prepended do
     property :additional_information, predicate: ::RDF::Vocab::DC.accessRights do |index|
       index.as :stored_searchable
     end
