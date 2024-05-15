@@ -9,6 +9,8 @@ Hyrax.config do |config|
   config.register_curation_concern :etd
   # # Injected via `rails g hyrax:work Cdl`
   # config.register_curation_concern :cdl
+  # Injected via `rails g hyrax:work_resource EtdResource`
+  config.register_curation_concern :etd_resource
 
   # # See https://github.com/scientist-softserv/adventist-dl/issues/183
   # # Also, we will continue to extract txt file's text using Adventist::TextFileTextExtractionService
