@@ -4,13 +4,15 @@
 Hyrax.config do |config|
   # TODO: Valkyrize models and update this initializer
   # Injected via `rails g hyrax:work Oer`
-  # config.register_curation_concern :oer
+  config.register_curation_concern :oer
   # Injected via `rails g hyrax:work Etd`
   config.register_curation_concern :etd
   # # Injected via `rails g hyrax:work Cdl`
   # config.register_curation_concern :cdl
   # Injected via `rails g hyrax:work_resource EtdResource`
   config.register_curation_concern :etd_resource
+  # Injected via `rails g hyrax:work_resource OerResource`
+  config.register_curation_concern :oer_resource
 
   # # See https://github.com/scientist-softserv/adventist-dl/issues/183
   # # Also, we will continue to extract txt file's text using Adventist::TextFileTextExtractionService
