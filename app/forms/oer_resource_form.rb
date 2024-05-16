@@ -6,7 +6,8 @@
 # @see https://github.com/samvera/hyrax/wiki/Hyrax-Valkyrie-Usage-Guide#forms
 # @see https://github.com/samvera/valkyrie/wiki/ChangeSets-and-Dirty-Tracking
 class OerResourceForm < Hyrax::Forms::PcdmObjectForm(OerResource)
-  include Hyrax::FormFields(:basic_metadata)
+  # Commented out basic_metadata because these terms were added to etd_resource so we can customize it.
+  # include Hyrax::FormFields(:basic_metadata)
   include Hyrax::FormFields(:oer_resource)
   include Hyrax::FormFields(:with_pdf_viewer)
   include Hyrax::FormFields(:with_video_embed)
@@ -19,4 +20,58 @@ class OerResourceForm < Hyrax::Forms::PcdmObjectForm(OerResource)
   # model attribute, make it virtual
   #
   # property :user_input_not_destined_for_the_model, virtual: true
+
+  delegate :related_members_attributes=, :previous_version, :newer_version, :alternate_version, :related_item, to: :model
+
+  def self.build_permitted_params
+    super + [
+      {
+        related_members_attributes: %i[id _destroy relationship]
+      }
+    ]
+  end
+
+  def previous_version_json
+    previous_version.map do |child|
+      {
+        id: child.id,
+        label: child.to_s,
+        path: @controller.url_for(child),
+        relationship: "previous-version"
+      }
+    end.to_json
+  end
+
+  def newer_version_json
+    newer_version.map do |child|
+      {
+        id: child.id,
+        label: child.to_s,
+        path: @controller.url_for(child),
+        relationship: "newer-version"
+      }
+    end.to_json
+  end
+
+  def alternate_version_json
+    alternate_version.map do |child|
+      {
+        id: child.id,
+        label: child.to_s,
+        path: @controller.url_for(child),
+        relationship: "alternate-version"
+      }
+    end.to_json
+  end
+
+  def related_item_json
+    related_item.map do |child|
+      {
+        id: child.id,
+        label: child.to_s,
+        path: @controller.url_for(child),
+        relationship: "related-item"
+      }
+    end.to_json
+  end
 end
