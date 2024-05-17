@@ -13,10 +13,10 @@ class CreateGroupAndAddMembersJob < ApplicationJob
   queue_as :default
 
   def perform(cdl_id, retries = 0)
-    work = Cdl.where(id: cdl_id).first
+    work = Hyrax.query_service.find_by(id: cdl_id)
     return if work.nil?
 
-    page_count = work.file_sets.first.page_count.first.to_i
+    page_count = work.members.first.original_file.page_count.first.to_i
     child_model = work.iiif_print_config.pdf_split_child_model
     child_works_count = work.members.select { |member| member.is_a?(child_model) }.count
 
@@ -28,7 +28,7 @@ class CreateGroupAndAddMembersJob < ApplicationJob
         assign_read_groups(member, group.name)
       end
 
-      work.save
+      Hyrax.persister.save(resource: work)
       group.save
     else
       return if retries > RETRY_MAX
@@ -42,7 +42,7 @@ class CreateGroupAndAddMembersJob < ApplicationJob
 
     def assign_read_groups(member, group_name)
       member.read_groups = [group_name]
-      member.save
+      Hyrax.persister.save(resource: member)
       member.members.each do |sub_member|
         assign_read_groups(sub_member, group_name)
       end
