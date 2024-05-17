@@ -1,0 +1,149 @@
+# frozen_string_literal: true
+
+module CatalogControllerDecorator
+  extend ActiveSupport::Concern
+
+  prepended do
+    before_action :sort_alphabetical
+  end
+
+  def sort_alphabetical
+    params[:sort] = 'title_ssi asc' if params[:f].present?
+  end
+end
+
+CatalogController.prepend(CatalogControllerDecorator)
+
+def solr_name(*args)
+  ActiveFedora.index_field_mapper.solr_name(*args)
+end
+
+def self.uploaded_field
+  'system_create_dtsi'
+end
+
+CatalogController.configure_blacklight do |config|
+  # We need need to clear the facet fields that are already declared in the
+  # catalog controller; if we do not, we'll encounter exceptions regarding
+  # duplicate declarations.
+  config.facet_fields.clear
+
+  config.add_facet_field 'human_readable_type_sim', label: "Type", limit: 5
+  config.add_facet_field 'resource_type_sim', label: "Resource Type", limit: 5
+  config.add_facet_field 'creator_sim', limit: 5
+  config.add_facet_field 'contributor_sim', label: "Contributor", limit: 5
+  config.add_facet_field 'keyword_sim', limit: 5
+  config.add_facet_field 'subject_sim', limit: 5
+  config.add_facet_field 'language_sim', limit: 5
+  config.add_facet_field 'based_near_label_sim', limit: 5
+  config.add_facet_field 'publisher_sim', limit: 5
+  config.add_facet_field 'file_format_sim', limit: 5
+  config.add_facet_field 'contributing_library_sim', limit: 5
+  config.add_facet_field 'date_ssi', label: 'Date Created', range: { num_segments: 10, assumed_boundaries: [1100, Time.zone.now.year + 2], segments: false, slider_js: false, maxlength: 4 }
+  config.add_facet_field 'member_of_collections_ssim', limit: 5, label: 'Collections'
+  config.add_facet_field 'account_institution_name_ssim', label: 'Institution', limit: 5
+
+
+  config.index_fields.clear
+
+  config.add_index_field 'all_text_tsimv', highlight: true, helper_method: :render_ocr_snippets
+  config.add_index_field solr_name("title", :stored_searchable), label: "Title", itemprop: 'name', if: false
+  config.add_index_field solr_name("creator", :stored_searchable), itemprop: 'creator', link_to_search: solr_name("creator", :facetable)
+  config.add_index_field solr_name("date", :stored_searchable), itemprop: 'date'
+  config.add_index_field solr_name('collection_subtitle', :stored_searchable), label: "Collection Subtitle"
+  config.add_index_field solr_name("description", :stored_searchable), itemprop: 'description', helper_method: :truncate_and_iconify_auto_link
+  config.add_index_field solr_name("resource_type", :stored_searchable), label: "Resource Type", link_to_search: solr_name("resource_type", :facetable)
+  config.add_index_field solr_name('learning_resource_type', :stored_searchable), label: "Learning resource type"
+  config.add_index_field solr_name('education_level', :stored_searchable), label: "Education level"
+  config.add_index_field solr_name('audience', :stored_searchable), label: "Audience"
+  config.add_index_field solr_name('discipline', :stored_searchable), label: "Discipline"
+
+  config.show_fields.clear
+  
+  config.add_show_field solr_name('admin_note', :stored_searchable), label: "Administrative Notes"
+  config.add_show_field solr_name("alternative_title", :stored_searchable), label: "Alternative title"
+  config.add_show_field solr_name("related_url", :stored_searchable)
+  config.add_show_field solr_name('learning_resource_type', :stored_searchable)
+  config.add_show_field solr_name('education_level', :stored_searchable)
+  config.add_show_field solr_name('audience', :stored_searchable)
+  config.add_show_field solr_name('discipline', :stored_searchable)
+  config.add_show_field solr_name("date", :stored_searchable), label: "Date", helper_method: :human_readable_date
+  config.add_show_field solr_name("table_of_contents", :stored_searchable), label: "Table of contents"
+  config.add_show_field solr_name("rights_holder", :stored_searchable), label: "Rights holder"
+  config.add_show_field solr_name("additional_information", :stored_searchable), label: "Additional information"
+  config.add_show_field solr_name("oer_size", :stored_searchable), label: "Size"
+  config.add_show_field solr_name('accessibility_feature', :stored_searchable)
+  config.add_show_field solr_name('accessibility_hazard', :stored_searchable)
+  config.add_show_field solr_name('accessibility_summary', :stored_searchable), label: "Accessibility summary"
+  config.add_show_field solr_name('previous_version_id', :stored_searchable)
+  config.add_show_field solr_name('newer_version_id', :stored_searchable)
+  config.add_show_field solr_name('related_item_id', :stored_searchable)
+  config.add_show_field solr_name('contributing_library', :stored_searchable)
+  config.add_show_field solr_name('library_catalog_identifier', :stored_searchable)
+  config.add_show_field solr_name('chronology_note', :stored_searchable)
+
+
+  # list of all the search_fields that will use the default configuration below.
+  search_fields_without_customization = [
+    { name: 'abstract', label: 'Abstract' },
+    { name: 'advisor', label: 'Advisor' },
+    { name: 'accessibility_feature', label: 'Accessibility Feature' },
+    { name: 'accessibility_hazard', label: 'Accessibility Hazard' },
+    { name: 'accessibility_summary', label: 'Accessibility Summary' },
+    { name: 'additional_information', label: 'Additional Rights Information or Access Rights' },
+    { name: 'alternative_title', label: 'Alternative Title' },
+    { name: 'audience', label: 'Audience' },
+    { name: 'bibliographic_citation', label: 'Bibliographic Citation' },
+    { name: 'committee_member', label: 'Committee Member' },
+    { name: 'department', label: 'Department' },
+    { name: 'degree_discipline', label: 'Discipline' },
+    { name: 'education_level', label: 'Education Level' },
+    { name: 'degree_grantor', label: 'Grantor' },
+    { name: 'learning_resource_type', label: 'Learning Resource Type' },
+    { name: 'degree_level', label: 'Level' },
+    { name: 'related_url', label: 'Related URL' },
+    { name: 'rights_holder', label: 'Rights Holder' },
+    { name: 'rights_notes', label: 'Rights Notes' },
+    { name: 'size', label: 'Size' },
+    { name: 'table_of_contents', label: 'Table of Contents' }
+  ]
+
+  search_fields_without_customization.each do |search_field|
+    config.search_fields.delete(search_field[:name])
+    config.add_search_field(search_field[:name]) do |field|
+      field.label = search_field[:label]
+      field.solr_parameters = { "spellcheck.dictionary": search_field[:name] }
+      solr_name = "#{search_field[:name]}_tesim"
+      field.solr_local_parameters = {
+        qf: solr_name,
+        pf: solr_name
+      }
+    end
+  end
+
+  # If there is something additional about a search field that needs to be customized i.e. whether to include in advanced search, or if it needs a different solr name, add it below
+  config.search_fields.delete('date')
+  config.add_search_field('date') do |field|
+    solr_name = 'date_ssi'
+    field.include_in_advanced_search = false
+    field.solr_local_parameters = {
+      qf: solr_name,
+      pf: solr_name
+    }
+  end
+
+  # "sort results by" select (pulldown)
+  # label in pulldown is followed by the name of the SOLR field to sort by and
+  # whether the sort is ascending or descending (it must be asc or desc
+  # except in the relevancy case).
+  # label is key, solr field is value
+  config.sort_fields.clear
+
+  config.add_sort_field "title_ssi asc", label: "title (A-Z)"
+  config.add_sort_field "title_ssi desc", label: "title (Z-A)"
+  config.add_sort_field "date_ssi desc", label: "date created \u25BC"
+  config.add_sort_field "date_ssi asc", label: "date created \u25B2"
+  config.add_sort_field "#{uploaded_field} desc", label: "date uploaded \u25BC"
+  config.add_sort_field "#{uploaded_field} asc", label: "date uploaded \u25B2"
+end
+

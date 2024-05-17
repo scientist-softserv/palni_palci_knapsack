@@ -1,0 +1,78 @@
+---
+zh:
+  simple_form:
+    cancel: 取消
+    error_notification:
+      default_message: 请检查以下问题：
+    hints:
+      account:
+        admin_emails: 一次输入一个电子邮件地址
+        allow_signup: 允许用户注册您的存储库
+        cache_api: 打开API端点的缓存。实验性
+        contact_email: 系统通知将从其中发送的电子邮件地址。需要额外的配置才能从网站域以外的域添加地址
+        contact_email_to: 通过联系页面提交的消息发送到的电子邮件地址
+        doi_reader: 显示从Datacite读取以填充记录的能力。仍在进行中，请勿使用
+        doi_writer: 为记录编写DOIs。仍在进行中，请勿使用
+        email_format: 设置允许注册此存储库的电子邮件域的列表，例如(@ubiquitypress.com @gmail.com)。每个域之间留一个空格。
+        email_subjet_prefix: 放在系统电子邮件主题前面的字符串。
+        enable_oai_metadata: 启用或禁用OAI链接
+        fcrepo_endpoint:
+          base_path: Fedora基本路径应该以斜杠开始且不应该以斜杠结束
+          url: Fedora URL不应该以斜杠结束
+        file_acl: 如果使用不支持设置访问控制列表的文件系统（如samba或nfs），请关闭它
+        file_size_limit: 此值应至少设置为536870912000
+        geonames_username: 在http://www.geonames.org/manageaccount上注册
+        google_analytics_id: 您的Google Analytics帐户ID
+        gtm_id: 您的Google标签管理器帐户ID
+        is_public: 用户可以在主页上发现您的网站，或者不需要特殊的用户名/密码就可以访问您的页面吗？
+        locale_name: '添加到其locale.yml文件的租户特定语言环境后缀的名称。只应添加字母字符，不应添加符号或数字，这些将随后大写。
+
+          '
+        monthly_email_list: 每月报告的电子邮件地址列表。每个电子邮件之间留一个空格
+        name: 用于存储技术方面的单一或连字符名称（例如，“acme”或“acme-library”）。
+        oai_admin_email: OAI端点联系电子邮件地址
+        shared_login: 启用或禁用共享登录
+        ssl_configured: 如果使用https，请将其设置为true
+        weekly_email_list: 每周报告的电子邮件地址列表。每个电子邮件之间留一个空格
+        yearly_email_list: 每年报告的电子邮件地址列表。每个电子邮件之间留一个空格
+      hyku_group:
+        description: 该组的角色简介
+      user:
+        email: 一次输入一个电子邮件地址。您也可以通过此表格重新发送邀请。角色仅适用于此租户。
+    labels:
+      account:
+        admin_emails: 添加或邀请新管理员（通过电子邮件）
+        cname: 主域名
+        fcrepo_endpoint:
+          base_path: 基本路径
+          url: URL
+        gtm_id: Google标签管理器
+        name: 简称
+        solr_endpoint:
+          url: URL
+        tenant: 租户UUID
+      add_user_to_group:
+        user_ids: 用户ID
+      defaults:
+        admin_note: 管理员备注
+      domain_names:
+        cname: 域名
+      group_search:
+        q: 搜索
+      hyku_group:
+        description: 描述
+      page_size:
+        per: 显示
+      user:
+        display_name: 您的名字
+        email: 电子邮件地址
+      user_search:
+        uq: 用户搜索
+    'no': 否
+    placeholders:
+      user_search:
+        uq: 名称或用户名
+    required:
+      mark: "*"
+      text: 必填
+    'yes': 是

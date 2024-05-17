@@ -1,0 +1,29 @@
+.account-form {
+  label {
+    text-align: right;
+  }
+
+  .help-block {
+    margin-bottom: 0;
+    margin-top: 5px;
+  }
+}
+
+.registration {
+  .required-tag {
+    display: none;
+  }
+}
+
+.field_with_errors {
+  border-radius: $border-radius-base;
+  margin-top: 5px;
+}
+
+.blacklight-account_institution_name_ssim {
+  display: none;
+}
+
+body.search-only .blacklight-account_institution_name_ssim {
+  display: block;
+}

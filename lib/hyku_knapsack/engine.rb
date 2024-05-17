@@ -21,8 +21,8 @@ module HykuKnapsack
       # only add the migrations if they are not already copied
       # via the rake task. Allows gem to work both with the install:migrations
       # and without it.
-      if !app.root.to_s.match(root.to_s) &&
-         app.root.join('db/migrate').children.none? { |path| path.fnmatch?("*.hyku_knapsack.rb") }
+      if !app.root.to_s.match(HykuKnapsack::Engine.root.to_s) &&
+          app.root.join('db/migrate').children.none? { |path| path.fnmatch?("*.hyku_knapsack.rb") }
         config.paths["db/migrate"].expanded.each do |expanded_path|
           app.config.paths["db/migrate"] << expanded_path
         end
@@ -32,7 +32,7 @@ module HykuKnapsack
     config.before_initialize do
       config.i18n.load_path += Dir["#{config.root}/config/locales/**/*.yml"]
 
-      #if Hyku::Application.respond_to?(:user_devise_parameters=)
+      # if Hyku::Application.respond_to?(:user_devise_parameters=)
       #  Hyku::Application.user_devise_parameters = %i[
       #    database_authenticatable
       #    invitable
@@ -42,7 +42,10 @@ module HykuKnapsack
       #    validatable
       #    omniauthable
       #  ]
-      #end
+      # end
+
+      # Ensure we are prepending the Hyrax::SimpleSchemaLoaderDecorator early
+      Hyrax::SimpleSchemaLoader.prepend(Hyrax::SimpleSchemaLoaderDecorator)
     end
 
     config.after_initialize do
@@ -54,13 +57,7 @@ module HykuKnapsack
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
 
-      # By default plain text files are not processed for text extraction.  In adding
-      # Adventist::TextFileTextExtractionService to the beginning of the services array we are
-      # enabling text extraction from plain text files.
-      #
-      # https://github.com/scientist-softserv/adventist-dl/blob/97bd05946345926b2b6c706bd90e183a9d78e8ef/config/application.rb#L68-L73
       Hyrax::DerivativeService.services = [
-        # Adventist::TextFileTextExtractionService,
         IiifPrint::PluggableDerivativeService
       ]
 
