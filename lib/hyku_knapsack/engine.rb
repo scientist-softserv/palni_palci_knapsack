@@ -48,7 +48,7 @@ module HykuKnapsack
       Hyrax::SimpleSchemaLoader.prepend(Hyrax::SimpleSchemaLoaderDecorator)
     end
 
-    config.after_initialize do
+    config.to_prepare do
       HykuKnapsack::Engine.root.glob("app/**/*_decorator*.rb").sort.each do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
@@ -56,7 +56,9 @@ module HykuKnapsack
       HykuKnapsack::Engine.root.glob("lib/**/*_decorator*.rb").sort.each do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
+    end
 
+    config.after_initialize do
       Hyrax::DerivativeService.services = [
         IiifPrint::PluggableDerivativeService
       ]
