@@ -2,13 +2,10 @@
 # rubocop:disable Metrics/BlockLength
 
 Rails.application.config.after_initialize do
-  [
-    Cdl,
-    Etd, 
-    GenericWork,
-    Image,
-    Oer
-  ].each do |klass|
+  # Add all concerns that are migrating from ActiveFedora here
+  CONCERNS = [Cdl, Etd, GenericWork, Image, Oer]
+
+  CONCERNS.each do |klass|
     Wings::ModelRegistry.register("#{klass}Resource".constantize, klass)
     # we register itself so we can pre-translate the class in Freyja instead of having to translate in each query_service
     Wings::ModelRegistry.register(klass, klass)
@@ -23,13 +20,7 @@ Rails.application.config.after_initialize do
   Valkyrie.config.resource_class_resolver = lambda do |resource_klass_name|
     # TODO: Can we use some kind of lookup.
     klass_name = resource_klass_name.gsub(/Resource$/, '')
-    if %w[
-      Cdl
-      Etd
-      GenericWork
-      Image
-      Oer
-    ].include?(klass_name)
+    if CONCERNS.map(&:to_s).include?(klass_name)
       "#{klass_name}Resource".constantize
     elsif 'Collection' == klass_name
       CollectionResource
