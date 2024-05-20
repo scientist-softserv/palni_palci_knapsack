@@ -21,7 +21,8 @@ class OerResourceForm < Hyrax::Forms::ResourceForm(OerResource)
   #
   # property :user_input_not_destined_for_the_model, virtual: true
 
-  delegate :related_members_attributes=, :previous_version, :newer_version, :alternate_version, :related_item, to: :model
+  delegate :related_members_attributes=, :previous_version, :newer_version, :alternate_version, :related_item,
+           :previous_version_id, :newer_version_id, :alternate_version_id, :related_item_id, to: :model
 
   def self.build_permitted_params
     super + [
@@ -32,6 +33,8 @@ class OerResourceForm < Hyrax::Forms::ResourceForm(OerResource)
   end
 
   def previous_version_json
+    return unless previous_version.present?
+
     previous_version.map do |child|
       {
         id: child.id,
@@ -43,6 +46,8 @@ class OerResourceForm < Hyrax::Forms::ResourceForm(OerResource)
   end
 
   def newer_version_json
+    return unless newer_version.present?
+
     newer_version.map do |child|
       {
         id: child.id,
@@ -54,6 +59,8 @@ class OerResourceForm < Hyrax::Forms::ResourceForm(OerResource)
   end
 
   def alternate_version_json
+    return unless alternate_version.present?
+
     alternate_version.map do |child|
       {
         id: child.id,
@@ -65,6 +72,8 @@ class OerResourceForm < Hyrax::Forms::ResourceForm(OerResource)
   end
 
   def related_item_json
+    return unless related_item.present?
+
     related_item.map do |child|
       {
         id: child.id,

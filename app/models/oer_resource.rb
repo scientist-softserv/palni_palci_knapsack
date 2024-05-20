@@ -22,18 +22,18 @@ class OerResource < Hyrax::Work
   prepend OrderAlready.for(:creator)
 
   def previous_version
-    @previous_version ||= Hyrax.query_service.find_by(id: previous_version_id) if previous_version_id
+    @previous_version ||= Hyrax.query_service.find_by(id: previous_version_id) if previous_version_id.present?
   end
 
   def newer_version
-    @newer_version ||= Hyrax.query_service.find_by(id: newer_version_id) if newer_version_id
+    @newer_version ||= Hyrax.query_service.find_by(id: newer_version_id) if newer_version_id.present?
   end
 
   def alternate_version
-    @alternate_version ||= Hyrax.query_service.find_by(id: alternate_version_id) if alternate_version_id
+    @alternate_version ||= Hyrax.query_service.find_by(id: alternate_version_id) if alternate_version_id.present?
   end
 
   def related_item
-    @related_item ||= Hyrax.query_service.find_by(id: related_item_id) if related_item_id
+    @related_item ||= Hyrax.query_service.find_by(id: related_item_id) if related_item_id.present?
   end
 end
