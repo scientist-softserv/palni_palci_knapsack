@@ -2,7 +2,7 @@
 
 # Generated via
 #  `rails generate hyrax:work_resource CdlResource`
-class CdlResourceIndexer < Hyrax::Indexers::PcdmObjectIndexer(CdlResource)
+class CdlResourceIndexer < Hyrax::ValkyrieWorkIndexer
   include Hyrax::Indexer(:basic_metadata)
   include Hyrax::Indexer(:cdl_resource)
 
