@@ -309,17 +309,6 @@ attributes:
     form:
       primary: false
     predicate: http://purl.org/dc/elements/1.1/subject
-  bulkrax_identifier:
-    type: string
-    multiple: false
-    index_keys:
-      - "bulkrax_identifier_sim"
-      - "bulkrax_identifier_tesim"
-    # form:
-    #   required: false
-    #   primary: false
-    #   multiple: false
-    predicate: https://hykucommons.org/terms/bulkrax_identifier
   arkivo_checksum:
     type: string
     multiple: false

@@ -6,6 +6,8 @@ class CdlResourceIndexer < Hyrax::Indexers::PcdmObjectIndexer(CdlResource)
   include Hyrax::Indexer(:basic_metadata)
   include Hyrax::Indexer(:cdl_resource)
 
+  include HykuIndexing
+
   # Uncomment this block if you want to add custom indexing behavior:
   #  def to_solr
   #    super.tap do |index_document|
