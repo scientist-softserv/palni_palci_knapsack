@@ -42,16 +42,6 @@ attributes:
       required: true
       primary: true
     predicate: http://schema.org/keywords
-  resource_type:
-    type: string
-    multiple: true
-    form:
-      required: true
-      primary: true
-    index_keys:
-      - "resource_type_sim"
-      - "resource_type_tesim"
-    predicate: http://purl.org/dc/terms/type
   rights_statement:
     type: string
     multiple: true
@@ -62,6 +52,16 @@ attributes:
       - "rights_statement_sim"
       - "rights_statement_tesim"
     predicate: http://www.europeana.eu/schemas/edm/rights
+  resource_type:
+    type: string
+    multiple: true
+    form:
+      required: true
+      primary: true
+    index_keys:
+      - "resource_type_sim"
+      - "resource_type_tesim"
+    predicate: http://purl.org/dc/terms/type
   license:
     type: string
     multiple: true
@@ -94,6 +94,7 @@ attributes:
     multiple: true
     form:
       primary: false
+      multiple: true
     index_keys:
       - "additional_information_tesim"
     predicate: http://purl.org/dc/terms/accessRights
@@ -102,6 +103,7 @@ attributes:
     multiple: false
     form:
       primary: false
+      multiple: false
     index_keys:
       - "admin_note_tesim"
     predicate: http://schema.org/positiveNotes
@@ -128,6 +130,7 @@ attributes:
     multiple: true
     form:
       primary: false
+      multiple: true
     index_keys:
       - "bibliographic_citation_tesim"
     predicate: http://purl.org/dc/terms/bibliographicCitation
@@ -158,14 +161,6 @@ attributes:
       - "description_sim"
       - "description_tesim"
     predicate: http://purl.org/dc/elements/1.1/description
-  extent:
-    type: string
-    multiple: true
-    form:
-      primary: false
-    index_keys:
-      - "extent_tesim"
-    predicate: http://purl.org/dc/terms/extent
   identifier:
     type: string
     multiple: true
@@ -252,10 +247,3 @@ attributes:
   relative_path:
     type: string
     predicate: http://scholarsphere.psu.edu/ns#relativePath
-  bulkrax_identifier:
-    type: string
-    predicate: https://hykucommons.org/terms/bulkrax_identifier
-    multiple: false
-    index_keys:
-      - "bulkrax_identifier_tesim"
-      - "bulkrax_identifier_sim"

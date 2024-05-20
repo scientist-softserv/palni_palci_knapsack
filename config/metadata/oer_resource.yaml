@@ -313,13 +313,6 @@ attributes:
     index_keys:
       - "table_of_contents_tesim"
     predicate: http://purl.org/dc/terms/tableOfContents
-  bulkrax_identifier:
-    type: string
-    multiple: false
-    index_keys:
-      - "bulkrax_identifier_tesim"
-      - "bulkrax_identifier_sim"
-    predicate: https://hykucommons.org/terms/bulkrax_identifier"
   previous_version_id:
     type: string
     multiple: true
