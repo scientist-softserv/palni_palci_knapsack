@@ -34,7 +34,7 @@ module IiifPrint
             # report failures & keep pending relationships
             raise "CreateRelationshipsJob failed for parent id: #{@parent_id} " \
                   "had #{@number_of_successes} successes & #{@number_of_failures} failures, " \
-                  "with errors: #{@errors}. Wanted #{@pending_children} children."
+                  "with errors: #{@errors}. Wanted #{@pending_children.count} children."
           end
 
           # OVERRIDE begin

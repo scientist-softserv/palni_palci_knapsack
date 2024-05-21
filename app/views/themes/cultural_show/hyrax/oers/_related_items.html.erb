@@ -1,7 +1,7 @@
-<%  previous_members = presenter.member_presenters_for(presenter.previous_versions) %>
-<%  newer_members = presenter.member_presenters_for(presenter.newer_versions) %>
-<%  alternate_members = presenter.member_presenters_for(presenter.alternate_versions) %>
-<%  related_items = presenter.member_presenters_for(presenter.related_items) %>
+<%  previous_members = presenter.member_presenters(presenter.previous_versions) %>
+<%  newer_members = presenter.member_presenters(presenter.newer_versions) %>
+<%  alternate_members = presenter.member_presenters(presenter.alternate_versions) %>
+<%  related_items = presenter.member_presenters(presenter.related_items) %>
 <% if previous_members.present? || newer_members.present? || alternate_members.present? || related_items.present? %>
   <h4><%= t('hyrax.oer.show.related_items') %></h4>
   <table class="table table-responsive">
@@ -26,4 +26,3 @@
     <% end %>
   </div>
   <% end %>
-
