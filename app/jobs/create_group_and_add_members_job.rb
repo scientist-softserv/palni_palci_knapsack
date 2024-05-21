@@ -34,7 +34,7 @@ class CreateGroupAndAddMembersJob < ApplicationJob
       return if retries > RETRY_MAX
 
       retries += 1
-      CreateGroupAndAddMembersJob.set(wait: 10.minutes).perform_later(cdl_id, retries)
+      CreateGroupAndAddMembersJob.set(wait: 10.minutes).perform_later(cdl_id.to_s, retries)
     end
   end
 
@@ -43,6 +43,8 @@ class CreateGroupAndAddMembersJob < ApplicationJob
     def assign_read_groups(member, group_name)
       member.read_groups = [group_name]
       Hyrax.persister.save(resource: member)
+      return if member.is_a?(Hyrax::FileSet)
+
       member.members.each do |sub_member|
         assign_read_groups(sub_member, group_name)
       end
