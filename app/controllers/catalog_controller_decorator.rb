@@ -166,6 +166,33 @@ CatalogController.configure_blacklight do |config|
     }
   end
 
+  config.search_fields.delete('based_near_label')
+  config.add_search_field('based_near_label') do |field|
+    solr_name = 'based_near_label_tesim'
+    field.include_in_advanced_search = false
+    field.label = 'Location'
+    field.solr_local_parameters = {
+      qf: solr_name,
+      pf: solr_name
+    }
+  end
+
+  # format cannot be included in advanced search because an error is thrown in Blacklight when formats do not match specific mime types
+  # see https://github.com/projectblacklight/blacklight/blob/13a8122fc6495e52acabc33875b80b51613d8351/app/controllers/concerns/blacklight/catalog.rb#L167
+  # and the error on https://github.com/projectblacklight/blacklight/blob/13a8122fc6495e52acabc33875b80b51613d8351/app/controllers/concerns/blacklight/catalog.rb#L206
+  config.search_fields.delete('format')
+  config.add_search_field('format') do |field|
+    field.include_in_advanced_search = false
+    field.solr_parameters = {
+      "spellcheck.dictionary": "format"
+    }
+    solr_name = 'format_tesim'
+    field.solr_local_parameters = {
+      qf: solr_name,
+      pf: solr_name
+    }
+  end
+
   # "sort results by" select (pulldown)
   # label in pulldown is followed by the name of the SOLR field to sort by and
   # whether the sort is ascending or descending (it must be asc or desc
@@ -173,6 +200,7 @@ CatalogController.configure_blacklight do |config|
   # label is key, solr field is value
   config.sort_fields.clear
 
+  config.add_sort_field "score desc, #{uploaded_field} desc", label: "relevance"
   config.add_sort_field "title_ssi asc", label: "title (A-Z)"
   config.add_sort_field "title_ssi desc", label: "title (Z-A)"
   config.add_sort_field "date_ssi desc", label: "date created \u25BC"
