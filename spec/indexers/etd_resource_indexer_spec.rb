@@ -7,7 +7,7 @@ require 'hyrax/specs/shared_specs/indexers'
 
 RSpec.describe EtdResourceIndexer do
   let(:indexer_class) { described_class }
-  let(:resource) { EtdResource.new }
+  let!(:resource) { Hyrax.persister.save(resource: EtdResource.new) }
 
   it_behaves_like 'a Hyrax::Resource indexer'
 end

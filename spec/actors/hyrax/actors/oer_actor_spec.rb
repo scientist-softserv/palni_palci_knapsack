@@ -2,7 +2,7 @@
 #  `rails generate hyrax:work Oer`
 require 'rails_helper'
 
-RSpec.describe Hyrax::Actors::OerActor do
+RSpec.describe Hyrax::Actors::OerActor, skip: 'In Valkyrie, transactions replaced actors' do
   subject(:middleware) do
     stack = ActionDispatch::MiddlewareStack.new.tap do |middleware|
       middleware.use described_class
