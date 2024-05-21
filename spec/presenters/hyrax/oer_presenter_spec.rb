@@ -123,16 +123,16 @@ RSpec.describe Hyrax::OerPresenter do
   end
 
   describe "#work_presenters" do
-    let(:obj) { create(:oer_with_file_and_work) }
+    let(:obj) { valkyrie_create(:cdl_resource, :with_file_and_work, depositor: 'somebody') }
     let(:attributes) { obj.to_solr }
 
     it "filters out members that are file sets" do
-      expect(presenter.work_presenters.size).to eq 1
+      expect(presenter.work_presenters.count).to eq 1
     end
   end
 
   describe "#manifest" do
-    let(:work) { create(:oer_work_with_one_file) }
+    let(:work) { valkyrie_create(:cdl_resource, :with_one_file_set, depositor: 'somebody') }
     let(:solr_document) { SolrDocument.new(work.to_solr) }
 
     describe "#sequence_rendering" do
@@ -141,7 +141,7 @@ RSpec.describe Hyrax::OerPresenter do
       end
 
       it "returns a hash containing the rendering information" do
-        work.rendering_ids = [work.file_sets.first.id]
+        work.rendering_ids = [work.members.first.id]
         expect(subject).to be_an Array
       end
     end

@@ -31,7 +31,7 @@ require 'dry-validation'
 # require only the support files necessary.
 #
 # Require supporting ruby files from spec/support/ and subdirectories.  Note: engine, not Rails.root context.
-Dir[File.join(File.dirname(__FILE__), "support/**/*.rb")].each { |f| require f }
+Dir[HykuKnapsack::Engine.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
@@ -42,6 +42,11 @@ RSpec.configure do |config|
   # TODO is this needed?
   config.include HykuKnapsack::Engine.routes.url_helpers
   config.include Capybara::DSL
+  config.include Fixtures::FixtureFileUpload
 
+  # To run specs locally without the spec/hyku_specs/ directory do: `bundle exec rspec --tag ~hyku`
+  config.define_derived_metadata(file_path: %r{spec/hyku_specs/}) do |metadata|
+    metadata[:hyku] = true
+  end
   ## End override
 end
