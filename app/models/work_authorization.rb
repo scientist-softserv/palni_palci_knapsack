@@ -128,6 +128,11 @@ class WorkAuthorization < ActiveRecord::Base # rubocop:disable ApplicationRecord
       authorization = find_or_create_by!(user_id: user.id, work_pid: work.id)
       authorization.update!(work_title: work.title, expires_at: expires_at)
 
+      acl = Hyrax::AccessControlList.new(resource: work)
+      acl.grant(:read).to(group)
+      acl.save
+      Hyrax.index_adapter.save(resource: work)
+
       group.add_members_by_id(user.id)
     end
   end

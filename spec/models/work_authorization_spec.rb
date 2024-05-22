@@ -3,18 +3,22 @@ require 'spec_helper'
 require 'cancan/matchers'
 
 RSpec.describe WorkAuthorization, type: :model do
-  let(:work) { FactoryBot.create(:generic_work) }
-  let(:other_work) { FactoryBot.create(:generic_work) }
+  let(:work) { FactoryBot.valkyrie_create(:generic_work_resource) }
+  let(:other_work) { FactoryBot.valkyrie_create(:generic_work_resource) }
   let(:borrowing_user) { FactoryBot.create(:user) }
   let(:ability) { ::Ability.new(borrowing_user) }
   let(:group) { FactoryBot.create(:group, name: work.id) }
   let(:other_group) { FactoryBot.create(:group, name: other_work.id) }
 
   before do
-    work.read_groups = [group.name]
-    work.save
-    other_work.read_groups = [other_group.name]
-    other_work.save
+    acl = Hyrax::AccessControlList.new(resource: work)
+    acl.grant(:read).to(group)
+    acl.save
+    Hyrax.index_adapter.save(resource: work)
+    other_acl = Hyrax::AccessControlList.new(resource: other_work)
+    other_acl.grant(:read).to(other_group)
+    other_acl.save
+    Hyrax.index_adapter.save(resource: other_work)
   end
 
   describe '.extract_pids_from' do
