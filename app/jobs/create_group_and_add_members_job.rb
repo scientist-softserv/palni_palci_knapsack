@@ -22,13 +22,12 @@ class CreateGroupAndAddMembersJob < ApplicationJob
 
     if page_count == child_works_count
       group = Hyrax::Group.find_or_create_by!(name: work.id)
-      work.read_groups = [group.name]
+      set_acl_for_group(group, work)
 
       work.members.each do |member|
-        assign_read_groups(member, group.name)
+        assign_read_groups(group, member)
       end
 
-      Hyrax.persister.save(resource: work)
       group.save
     else
       return if retries > RETRY_MAX
@@ -40,13 +39,19 @@ class CreateGroupAndAddMembersJob < ApplicationJob
 
   private
 
-    def assign_read_groups(member, group_name)
-      member.read_groups = [group_name]
-      Hyrax.persister.save(resource: member)
+    def assign_read_groups(group, member)
+      set_acl_for_group(group, member)
       return if member.is_a?(Hyrax::FileSet)
 
       member.members.each do |sub_member|
-        assign_read_groups(sub_member, group_name)
+        assign_read_groups(group, sub_member)
       end
+    end
+
+    def set_acl_for_group(group, work)
+      acl = Hyrax::AccessControlList.new(resource: work)
+      acl.grant(:read).to(group)
+      acl.save
+      Hyrax.index_adapter.save(resource: work)
     end
 end
