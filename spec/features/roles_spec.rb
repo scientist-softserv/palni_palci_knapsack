@@ -11,14 +11,14 @@ RSpec.describe 'Site Roles', type: :feature, clean: true do
     end
 
     it 'lists user roles' do
-      visit site_roles_path
+      visit '/site/roles'
 
       expect(page).to have_css 'td', text: user.email
       expect(page).to have_css 'td', text: another_user.email
     end
 
     it 'updates user roles' do
-      visit site_roles_path
+      visit '/site/roles'
 
       within "#edit_user_#{another_user.id}" do
         select 'admin', from: 'Roles'
