@@ -419,5 +419,13 @@ module Blacklight
     def document_link_params(_doc, opts)
       opts.except(:label, :counter)
     end
+
+    ##
+    # Returns a document presenter for the given document
+    def document_presenter(document)
+      Deprecation.silence(Blacklight::BlacklightHelperBehavior) do
+        presenter(document)
+      end
+    end
   end
 end

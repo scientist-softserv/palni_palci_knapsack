@@ -130,10 +130,11 @@ class WorkAuthorization < ActiveRecord::Base # rubocop:disable ApplicationRecord
 
       acl = Hyrax::AccessControlList.new(resource: work)
       acl.grant(:read).to(group)
-      acl.save
-      Hyrax.index_adapter.save(resource: work)
-
       group.add_members_by_id(user.id)
+      acl.save
+
+      work = Hyrax.query_service.find_by(id: work.id)
+      Hyrax.index_adapter.save(resource: work)
     end
   end
 
@@ -157,6 +158,8 @@ class WorkAuthorization < ActiveRecord::Base # rubocop:disable ApplicationRecord
       return unless group
 
       group.remove_members_by_id(user.id)
+      work = Hyrax.query_service.find_by(id: work.id)
+      Hyrax.index_adapter.save(resource: work)
     end
   end
 

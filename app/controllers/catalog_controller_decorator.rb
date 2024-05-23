@@ -59,7 +59,7 @@ CatalogController.configure_blacklight do |config|
   config.add_index_field solr_name('discipline', :stored_searchable), label: "Discipline"
 
   config.show_fields.clear
-  
+
   config.add_show_field solr_name("title", :stored_searchable)
   config.add_show_field solr_name('admin_note', :stored_searchable), label: "Administrative Notes"
   config.add_show_field solr_name("alternative_title", :stored_searchable), label: "Alternative title"
@@ -208,4 +208,3 @@ CatalogController.configure_blacklight do |config|
   config.add_sort_field "#{uploaded_field} desc", label: "date uploaded \u25BC"
   config.add_sort_field "#{uploaded_field} asc", label: "date uploaded \u25B2"
 end
-
