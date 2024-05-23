@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Generated via
 #  `rails generate hyrax:work Etd`
 module Hyrax
@@ -22,7 +23,7 @@ module Hyrax
       :department,
       :creator,
       :additional_information,
-      :bibliographic_citation,
+      :bibliographic_citation
     ]
 
     self.required_fields = [

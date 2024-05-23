@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Generated via
 #  `rails generate hyrax:work Oer`
 require 'rails_helper'
@@ -50,9 +51,7 @@ RSpec.describe Hyrax::OerForm do
       expect(subject['accessibility_feature']).to eq ['Alternative Text']
       expect(subject['accessibility_hazard']).to eq ['Flashing']
     end
-
   end
 
   include_examples("work_form")
-
 end

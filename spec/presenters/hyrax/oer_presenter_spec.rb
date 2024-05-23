@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Generated via
 #  `rails generate hyrax:work Oer`
 # NOTE: The majority of this spec is coming from the hyrax-iiif_av gem.

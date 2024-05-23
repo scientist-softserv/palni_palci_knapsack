@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RSpec.describe Hyrax::EducationLevelsService do
   describe "select_options" do
     subject { described_class.select_all_options }

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 namespace :hyku do
   desc "Remove Hyku Commons placeholder file sets from tenant"
   task remove_placeholder_file_sets: :environment do

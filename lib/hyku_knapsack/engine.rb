@@ -22,7 +22,7 @@ module HykuKnapsack
       # via the rake task. Allows gem to work both with the install:migrations
       # and without it.
       if app.root.to_s != HykuKnapsack::Engine.root.to_s &&
-          app.root.join('db/migrate').children.none? { |path| path.fnmatch?("*.hyku_knapsack.rb") }
+         app.root.join('db/migrate').children.none? { |path| path.fnmatch?("*.hyku_knapsack.rb") }
         config.paths["db/migrate"].expanded.each do |expanded_path|
           app.config.paths["db/migrate"] << expanded_path
         end

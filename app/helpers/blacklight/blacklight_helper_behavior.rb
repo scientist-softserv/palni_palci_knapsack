@@ -3,6 +3,7 @@
 # Override Blacklight v6.23.0 to add preferred view from search theme - Hyku Theming
 # Methods added to this helper will be available to all templates in the hosting application
 module Blacklight
+  # rubocop:disable Metrics/ModuleLength
   module BlacklightHelperBehavior
     include Blacklight::UrlHelperBehavior
     include Blacklight::ConfigurationHelperBehavior
@@ -390,7 +391,7 @@ module Blacklight
     ##
     # Open Search discovery tag for HTML <head> links
     def opensearch_description_tag(title, href)
-      tag :link, href: href, title: title, type: "application/opensearchdescription+xml", rel: "search"
+      tag.link(href:, title:, type: "application/opensearchdescription+xml", rel: "search")
     end
 
     # OVERIDE: Blacklight::UrlHelperBehavior:

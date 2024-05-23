@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Generated via
 #  `rails generate hyrax:work Oer`
 require 'rails_helper'
@@ -23,10 +24,11 @@ RSpec.describe Hyrax::Actors::OerActor, skip: 'In Valkyrie, transactions replace
   let(:attributes) do
     HashWithIndifferentAccess.new(related_members_attributes: {
                                     '0' => { id: previous_oer.id, _destroy: 'false', relationship: 'previous-version' },
-                                                     '1' => { id: newer_oer.id, _destroy: 'false', relationship: 'newer_version' },
-                                                     '2' => { id: alternate_oer.id, _destroy: 'false', relationship: 'alternate-version' },
-                                                     '3' => { id: related_item_oer.id, _destroy: 'false', relationship: 'related-item' }
-                                  }) end
+                                    '1' => { id: newer_oer.id, _destroy: 'false', relationship: 'newer_version' },
+                                    '2' => { id: alternate_oer.id, _destroy: 'false', relationship: 'alternate-version' },
+                                    '3' => { id: related_item_oer.id, _destroy: 'false', relationship: 'related-item' }
+                                  })
+  end
 
   describe "#create" do
     it 'adds a related version' do
@@ -80,9 +82,9 @@ RSpec.describe Hyrax::Actors::OerActor, skip: 'In Valkyrie, transactions replace
     it 'adds and removes relationships on same submit' do
       attributes = HashWithIndifferentAccess.new(related_members_attributes: {
                                                    '0' => { id: previous_oer.id, _destroy: 'true', relationship: 'previous-version' },
-                                                    '1' => { id: newer_oer.id, _destroy: 'false', relationship: 'newer-version' },
-                                                    '2' => { id: alternate_oer.id, _destroy: 'true', relationship: 'alternate-version' },
-                                                    '3' => { id: related_item_oer.id, _destroy: 'false', relationship: 'related-item' }
+                                                   '1' => { id: newer_oer.id, _destroy: 'false', relationship: 'newer-version' },
+                                                   '2' => { id: alternate_oer.id, _destroy: 'true', relationship: 'alternate-version' },
+                                                   '3' => { id: related_item_oer.id, _destroy: 'false', relationship: 'related-item' }
                                                  })
 
       env = Hyrax::Actors::Environment.new(work, ability, attributes)

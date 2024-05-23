@@ -12,13 +12,14 @@ class CreateGroupAndAddMembersJob < ApplicationJob
 
   queue_as :default
 
+  # rubocop:disable Metrics/MethodLength
   def perform(cdl_id, retries = 0)
     work = Hyrax.query_service.find_by(id: cdl_id)
     return if work.nil?
 
     page_count = work.members.first.original_file.page_count.first.to_i
     child_model = work.iiif_print_config.pdf_split_child_model
-    child_works_count = work.members.select { |member| member.is_a?(child_model) }.count
+    child_works_count = work.members.count { |member| member.is_a?(child_model) }
 
     if page_count == child_works_count
       group = Hyrax::Group.find_or_create_by!(name: work.id)
@@ -39,19 +40,19 @@ class CreateGroupAndAddMembersJob < ApplicationJob
 
   private
 
-    def assign_read_groups(group, member)
-      set_acl_for_group(group, member)
-      return if member.is_a?(Hyrax::FileSet)
+  def assign_read_groups(group, member)
+    set_acl_for_group(group, member)
+    return if member.is_a?(Hyrax::FileSet)
 
-      member.members.each do |sub_member|
-        assign_read_groups(group, sub_member)
-      end
+    member.members.each do |sub_member|
+      assign_read_groups(group, sub_member)
     end
+  end
 
-    def set_acl_for_group(group, work)
-      acl = Hyrax::AccessControlList.new(resource: work)
-      acl.grant(:read).to(group)
-      acl.save
-      Hyrax.index_adapter.save(resource: work)
-    end
+  def set_acl_for_group(group, work)
+    acl = Hyrax::AccessControlList.new(resource: work)
+    acl.grant(:read).to(group)
+    acl.save
+    Hyrax.index_adapter.save(resource: work)
+  end
 end

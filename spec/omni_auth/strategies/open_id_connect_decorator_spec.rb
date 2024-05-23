@@ -27,10 +27,10 @@ RSpec.describe OmniAuth::Strategies::OpenIDConnectDecorator do
   # rubocop:enable Metrics/LineLength
   let(:options) { { scope: [:openid] } }
   let(:session) { {} }
-  let(:request) { double(ActionDispatch::Request, params: params) }
+  let(:request) { double(ActionDispatch::Request, params:) }
   let(:params) { {} }
   let(:cookie_jar) { {} }
-  let(:instance) { strategy.new(options: options, session: session, request: request) }
+  let(:instance) { strategy.new(options:, session:, request:) }
 
   before do
     allow_any_instance_of(ActionDispatch::Request).to receive(:cookie_jar).and_return(cookie_jar)

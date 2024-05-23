@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RSpec.describe 'hyrax/oers/_attributes.html.erb' do
   let(:creator)     { 'Bilbo' }
   let(:contributor) { 'Frodo' }
@@ -51,7 +52,7 @@ RSpec.describe 'hyrax/oers/_attributes.html.erb' do
     allow(presenter).to receive(:member_of_collection_presenters).and_return([])
     allow(view).to receive(:dom_class).and_return('')
     allow(presenter).to receive(:editor?).and_return(true)
-    render 'hyrax/oers/attribute_rows', presenter: presenter
+    render 'hyrax/oers/attribute_rows', presenter:
   end
 
   # rubocop:disable RSpec/ExampleLength

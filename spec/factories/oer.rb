@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 FactoryBot.define do
   factory :oer, aliases: [:oer_work] do
     transient do

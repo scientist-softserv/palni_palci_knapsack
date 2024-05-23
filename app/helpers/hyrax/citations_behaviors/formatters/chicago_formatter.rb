@@ -16,13 +16,13 @@ module Hyrax
           text = "<span class=\"citation-author\">#{text}</span>" if text.present?
           text += format_title(work.to_s)
           pub_info = setup_pub_info(work, false)
-          text += " #{whitewash(pub_info)}." unless pub_info.blank?
+          text += " #{whitewash(pub_info)}." if pub_info.present?
           pub_date = setup_pub_date(work)
           text += " #{whitewash(pub_date)}." unless pub_date.nil?
           text += "  <span class='citation-link'>#{add_link_to_original(work)}</span>"
           # end
 
-          text.html_safe
+          text.html_safe # rubocop:disable Rails/OutputSafety
         end
 
         def format_authors(authors_list = [])
@@ -55,9 +55,9 @@ module Hyrax
 
         private
 
-          def whitewash(text)
-            Loofah.fragment(text.to_s).scrub!(:whitewash).to_s
-          end
+        def whitewash(text)
+          Loofah.fragment(text.to_s).scrub!(:whitewash).to_s
+        end
       end
     end
   end

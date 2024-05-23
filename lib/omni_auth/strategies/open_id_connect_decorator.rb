@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module OmniAuth
   module Strategies
     ##
@@ -8,6 +9,7 @@ module OmniAuth
       ##
       # override callback phase to fix issue where state is not required.
       # if require_state is false, it doesn't matter what is in the state param
+      # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
       def callback_phase
         error = params['error_reason'] || params['error']
         error_description = params['error_description'] || params['error_reason']
@@ -44,6 +46,7 @@ module OmniAuth
       ##
       # OVERRIDE
       # add debugging info
+      # rubocop:disable Metrics/MethodLength
       def decode_id_token(id_token)
         decoded = JSON::JWT.decode(id_token, :skip_verification)
         algorithm = decoded.algorithm.to_sym
@@ -134,7 +137,7 @@ module OmniAuth
         request = ActionDispatch::Request.new(Rails.application.env_config.merge(env))
         request.cookie_jar[:reshare_url].presence ||
           session["user_return_to"].presence ||
-          WorkAuthorization.url_from(scope: params['scope'], request: request)
+          WorkAuthorization.url_from(scope: params['scope'], request:)
       end
     end
   end

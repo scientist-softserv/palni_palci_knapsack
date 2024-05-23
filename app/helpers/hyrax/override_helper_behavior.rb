@@ -53,6 +53,5 @@ module Hyrax
       end
       text.truncate(230, separator: ' ')
     end
-
   end
 end

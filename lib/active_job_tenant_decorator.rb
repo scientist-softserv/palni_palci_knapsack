@@ -11,7 +11,7 @@ module ActiveJobTenantDecorator
 
   module ClassMethods
     def deserialize(job_data)
-      Raven.extra_context(job_data: job_data)
+      Raven.extra_context(job_data:)
       super.tap do |job|
         job.tenant = job_data['tenant']
         job.current_account = nil
@@ -43,21 +43,21 @@ module ActiveJobTenantDecorator
 
   private
 
-    delegate :non_tenant_job?, to: :class
+  delegate :non_tenant_job?, to: :class
 
-    def current_account
-      @current_account ||= Account.find_by(tenant: current_tenant)
-    end
+  def current_account
+    @current_account ||= Account.find_by(tenant: current_tenant)
+  end
 
-    def current_tenant
-      tenant || Apartment::Tenant.current
-    end
+  def current_tenant
+    tenant || Apartment::Tenant.current
+  end
 
-    def switch
-      Apartment::Tenant.switch(current_tenant) do
-        yield
-      end
+  def switch
+    Apartment::Tenant.switch(current_tenant) do
+      yield
     end
+  end
 end
 
 ActiveJobTenant.prepend(ActiveJobTenantDecorator)
