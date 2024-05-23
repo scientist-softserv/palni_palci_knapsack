@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # @see https://github.com/scientist-softserv/palni-palci/issues/674
+# rubocop:disable Metrics/BlockLength
 namespace :hyku do
   desc 'Move all banner images to new expected location'
   task copy_banner_images: :environment do

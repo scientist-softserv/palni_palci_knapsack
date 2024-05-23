@@ -4,6 +4,7 @@ module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     skip_before_action :verify_authenticity_token
 
+    # rubocop:disable Metrics/AbcSize
     def callback
       logger.info("=@=@=@=@  auth: #{request.env['omniauth.auth']}, params: #{params.inspect}")
 

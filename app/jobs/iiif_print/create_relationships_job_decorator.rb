@@ -5,6 +5,7 @@
 module IiifPrint
   module Jobs
     module CreateRelationshipsJobDecorator
+      # rubocop:disable Metrics/MethodLength
       def perform(parent_id:, parent_model:, child_model:, retries: 0, **)
         @parent_id = parent_id
         @parent_model = parent_model

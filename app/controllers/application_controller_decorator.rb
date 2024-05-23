@@ -44,40 +44,39 @@ module ApplicationControllerDecorator
     end
   end
 
-  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def global_request_logging
     FileUtils.mkdir_p(Rails.root.join('log')) unless Dir.exist?(Rails.root.join('log'))
     rl = ActiveSupport::Logger.new(Rails.root.join('log', 'request.log'))
-    if request.host&.match('blc.hykucommons')
-      http_request_header_keys = request.headers.env.keys.select { |header_name| header_name.match("^HTTP.*|^X-User.*") }
-      http_request_headers = request.headers.env.select { |header_name, _header_value| http_request_header_keys.index(header_name) }
+    return unless request.host&.match('blc.hykucommons')
 
-      rl.error '*' * 40
-      rl.error request.method
-      rl.error request.url
-      rl.error request.remote_ip
-      rl.error ActionController::HttpAuthentication::Token.token_and_options(request)
+    http_request_header_keys = request.headers.env.keys.select { |header_name| header_name.match("^HTTP.*|^X-User.*") }
 
-      cookies[:time] = Time.current.to_s
-      session[:time] = Time.current.to_s
-      http_request_header_keys.each do |key|
-        rl.error [format("%20s", key.to_s), ':', request.headers[key].inspect].join(" ")
-      end
-      rl.error '-' * 40 + ' params'
-      params.to_unsafe_hash.each_key do |key|
-        rl.error [format("%20s", key.to_s), ':', params[key].inspect].join(" ")
-      end
-      rl.error '-' * 40 + ' cookies'
-      cookies.to_h.each_key do |key|
-        rl.error [format("%20s", key.to_s), ':', cookies[key].inspect].join(" ")
-      end
-      rl.error '-' * 40 + ' session'
-      session.to_h.each_key do |key|
-        rl.error [format("%20s", key.to_s), ':', session[key].inspect].join(" ")
-      end
+    rl.error '*' * 40
+    rl.error request.method
+    rl.error request.url
+    rl.error request.remote_ip
+    rl.error ActionController::HttpAuthentication::Token.token_and_options(request)
 
-      rl.error '*' * 40
+    cookies[:time] = Time.current.to_s
+    session[:time] = Time.current.to_s
+    http_request_header_keys.each do |key|
+      rl.error [format("%20s", key.to_s), ':', request.headers[key].inspect].join(" ")
     end
+    rl.error '-' * 40 + ' params'
+    params.to_unsafe_hash.each_key do |key|
+      rl.error [format("%20s", key.to_s), ':', params[key].inspect].join(" ")
+    end
+    rl.error '-' * 40 + ' cookies'
+    cookies.to_h.each_key do |key|
+      rl.error [format("%20s", key.to_s), ':', cookies[key].inspect].join(" ")
+    end
+    rl.error '-' * 40 + ' session'
+    session.to_h.each_key do |key|
+      rl.error [format("%20s", key.to_s), ':', session[key].inspect].join(" ")
+    end
+
+    rl.error '*' * 40
   end
   # rubocop:enable Metrics/AbcSize
 

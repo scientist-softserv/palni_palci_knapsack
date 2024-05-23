@@ -119,6 +119,7 @@ class HykuKnapsack::WorkResourceGenerator < Rails::Generators::NamedBase
     end
   end
 
+  # rubocop:disable Metrics/MethodLength
   def insert_hyku_extra_includes_into_model
     model = File.join('../app/models/', class_path, "#{file_name}.rb")
     af_model = class_name.to_s.gsub('Resource', '')&.safe_constantize if class_name.end_with?('Resource')

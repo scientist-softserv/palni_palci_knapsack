@@ -22,6 +22,7 @@ def self.uploaded_field
   'system_create_dtsi'
 end
 
+# rubocop:disable Metrics/BlockLength
 CatalogController.configure_blacklight do |config|
   # We need need to clear the facet fields that are already declared in the
   # catalog controller; if we do not, we'll encounter exceptions regarding

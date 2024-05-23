@@ -12,6 +12,7 @@ class CreateGroupAndAddMembersJob < ApplicationJob
 
   queue_as :default
 
+  # rubocop:disable Metrics/MethodLength
   def perform(cdl_id, retries = 0)
     work = Hyrax.query_service.find_by(id: cdl_id)
     return if work.nil?

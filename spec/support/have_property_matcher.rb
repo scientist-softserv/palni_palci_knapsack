@@ -9,11 +9,9 @@ module HavePropertyHelpers
   def has_predicate?(model, property_name, compare_predicate)
     if has_property?(model, property_name)
       predicate = model.send(:properties)[property_name.to_s].predicate
-      if compare_predicate.is_a? Regexp
-        return !!(predicate =~ compare_predicate)
-      else
-        return predicate == compare_predicate
-      end
+
+      return !!(predicate =~ compare_predicate) if compare_predicate.is_a? Regexp
+      return predicate == compare_predicate
     end
     false
   end

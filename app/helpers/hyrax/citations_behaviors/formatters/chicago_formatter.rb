@@ -22,7 +22,7 @@ module Hyrax
           text += "  <span class='citation-link'>#{add_link_to_original(work)}</span>"
           # end
 
-          text.html_safe
+          text.html_safe # rubocop:disable Rails/OutputSafety
         end
 
         def format_authors(authors_list = [])

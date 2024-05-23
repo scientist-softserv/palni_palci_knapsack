@@ -3,6 +3,7 @@
 # Override Blacklight v6.23.0 to add preferred view from search theme - Hyku Theming
 # Methods added to this helper will be available to all templates in the hosting application
 module Blacklight
+  # rubocop:disable Metrics/ModuleLength
   module BlacklightHelperBehavior
     include Blacklight::UrlHelperBehavior
     include Blacklight::ConfigurationHelperBehavior

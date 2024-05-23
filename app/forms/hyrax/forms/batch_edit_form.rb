@@ -28,7 +28,7 @@ module Hyrax
       attr_reader :batch_document_ids
 
       # Returns a list of parameters we accept from the form
-      def self.build_permitted_params
+      def self.build_permitted_params # rubocop:disable Metrics/MethodLength
         [{ creator: [] },
          { contributor: [] },
          { description: [] },

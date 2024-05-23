@@ -102,6 +102,7 @@ module Bulkrax
     private
 
     # Will be skipped unless the #record is a Hash
+    # rubocop:disable Metrics/MethodLength
     def setup_records_with(relationship_type)
       records_with_relationship = []
 

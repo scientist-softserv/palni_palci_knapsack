@@ -8,13 +8,13 @@
 class WorkAuthorization < ActiveRecord::Base # rubocop:disable ApplicationRecord
   class WorkNotFoundError < StandardError
     def initialize(user:, work:)
-      "Unable to authorize #{user.class} #{user.user_key.inspect} for work with ID=#{work.id} because work does not exist."
+      super("Unable to authorize #{user.class} #{user.user_key.inspect} for work with ID=#{work.id} because work does not exist.")
     end
   end
 
   class GroupNotFoundError < StandardError
     def initialize(user:, group:)
-      "Unable to authorize #{user.class} #{user.user_key.inspect} for group with name=#{group.name.inspect} because group does not exist."
+      super("Unable to authorize #{user.class} #{user.user_key.inspect} for group with name=#{group.name.inspect} because group does not exist.")
     end
   end
 
