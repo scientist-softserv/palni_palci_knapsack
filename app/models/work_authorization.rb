@@ -4,12 +4,6 @@
 # outside the model.  In the case of PALNI/PALCI there will be a Shibboleth/SAML authentication that
 # indicates we should create a WorkAuthorization entry for a group of works.
 #
-# @note Transactions across data storage layers (e.g. postgres and fedora) are precarious.  Fedora
-#       doesn't have proper transactions and there is not a clear concept of Postgres and Fedora
-#       sharing a transaction pool.  However, we can emulate one by having a postgres transaction that:
-#       first does all of the postgres and then does one (ideally single) fedora change.  It is
-#       not bullet proof but does hopefully improve the chances of data integrity.
-#
 # @see https://github.com/scientist-softserv/palni-palci/issues/633
 class WorkAuthorization < ActiveRecord::Base # rubocop:disable ApplicationRecord
   class WorkNotFoundError < StandardError
@@ -51,7 +45,7 @@ class WorkAuthorization < ActiveRecord::Base # rubocop:disable ApplicationRecord
     # Maybe we get multiple pids; let's handle that accordingly
     pids.each do |pid|
       begin
-        work = ActiveFedora::Base.where(id: pid).first
+        work = Hyrax.query_service.find_by(id: pid)
         group = Hyrax::Group.find_by(name: pid)
         authorize!(user: user, work: work, group: group, expires_at: authorize_until)
       rescue WorkNotFoundError, GroupNotFoundError
@@ -61,7 +55,7 @@ class WorkAuthorization < ActiveRecord::Base # rubocop:disable ApplicationRecord
 
     # We re-authorized the above pids, so it should not be in this query.
     where("user_id = :user_id AND expires_at <= :expires_at", user_id: user.id, expires_at: revoke_expirations_before).pluck(:work_pid).each do |pid|
-      work = ActiveFedora::Base.where(id: pid).first
+      work = Hyrax.query_service.find_by(id: pid)
       revoke!(user: user, work: work)
     end
   end
@@ -119,7 +113,7 @@ class WorkAuthorization < ActiveRecord::Base # rubocop:disable ApplicationRecord
   # Grant the given :user permission to read the work associated with the given :work_pid.
   #
   # @param user [User]
-  # @param work [ActiveFedora::Base]
+  # @param work [Valkyrie::Resource]
   # @param group [Hyrax::Group]
   #
   # @raise [WorkAuthorization::WorkNotFoundError] when the given :work_pid is not found.
@@ -134,7 +128,13 @@ class WorkAuthorization < ActiveRecord::Base # rubocop:disable ApplicationRecord
       authorization = find_or_create_by!(user_id: user.id, work_pid: work.id)
       authorization.update!(work_title: work.title, expires_at: expires_at)
 
+      acl = Hyrax::AccessControlList.new(resource: work)
+      acl.grant(:read).to(group)
       group.add_members_by_id(user.id)
+      acl.save
+
+      work = Hyrax.query_service.find_by(id: work.id)
+      Hyrax.index_adapter.save(resource: work)
     end
   end
 
@@ -142,7 +142,7 @@ class WorkAuthorization < ActiveRecord::Base # rubocop:disable ApplicationRecord
   # Remove permission for the given :user to read the work associated with the given :work_pid.
   #
   # @param user [User]
-  # @param work [ActiveFedora::Base]
+  # @param work [Valkyrie::Resource]
   #
   # @see .authorize!
   def self.revoke!(user:, work:)
@@ -158,6 +158,8 @@ class WorkAuthorization < ActiveRecord::Base # rubocop:disable ApplicationRecord
       return unless group
 
       group.remove_members_by_id(user.id)
+      work = Hyrax.query_service.find_by(id: work.id)
+      Hyrax.index_adapter.save(resource: work)
     end
   end
 

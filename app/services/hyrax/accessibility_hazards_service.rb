@@ -19,6 +19,7 @@ module Hyrax
     # @return [String] a schema.org type. Gives the default type if `id` is nil.
     def self.microdata_type(id)
       return Hyrax.config.microdata_default_type if id.nil?
+
       Microdata.fetch("accessibility_hazard_type.#{id}", default: Hyrax.config.microdata_default_type)
     end
   end

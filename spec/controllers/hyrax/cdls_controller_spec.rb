@@ -1,15 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Hyrax::CdlsController do
-  let(:user) { FactoryBot.create(:user) }
-  let(:work) { FactoryBot.create(:cdl_work_with_one_file, user: user) }
-  let(:file_set) { work.ordered_members.to_a.first }
-
-  before do
-    Hydra::Works::AddFileToFileSet.call(file_set,
-                                        fixture_file('images/world.png'),
-                                        :original_file)
-  end
+  let(:cdl_resource) { FactoryBot.valkyrie_create(:cdl_resource, :with_one_file_set, depositor: 'somebody') }
 
   it "includes Hyrax::IiifAv::ControllerBehavior" do
     expect(described_class.include?(Hyrax::IiifAv::ControllerBehavior)).to be true

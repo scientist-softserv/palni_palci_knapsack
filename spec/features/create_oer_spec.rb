@@ -16,7 +16,7 @@ RSpec.feature 'Create a Oer', type: :feature, js: true, clean: true, cohort: 'al
       Sipity::Workflow.create!(
         active: true,
         name: 'test-workflow',
-        permission_template: permission_template
+        permission_template:
       )
     end
 
@@ -26,7 +26,7 @@ RSpec.feature 'Create a Oer', type: :feature, js: true, clean: true, cohort: 'al
       create(:editors_group)
       create(:depositors_group)
       # Create a single action that can be taken
-      Sipity::WorkflowAction.create!(name: 'submit', workflow: workflow)
+      Sipity::WorkflowAction.create!(name: 'submit', workflow:)
 
       # Grant the user access to deposit into the admin set.
       Hyrax::PermissionTemplateAccess.create!(
@@ -50,24 +50,24 @@ RSpec.feature 'Create a Oer', type: :feature, js: true, clean: true, cohort: 'al
       choose "payload_concern", option: "Oer"
       click_button "Create work"
 
-      expect(page).to have_content "Add New OER"
+      expect(page).to have_content(/Add New OER/i)
       click_link "Files" # switch tab
       expect(page).to have_content "Add files"
       expect(page).to have_content "Add folder"
       within('div#add-files') do
-        attach_file("files[]", Rails.root.join('spec', 'fixtures', 'images', 'image.jp2'), visible: false)
-        attach_file("files[]", Rails.root.join('spec', 'fixtures', 'images', 'jp2_fits.xml'), visible: false)
+        attach_file("files[]", File.join(fixture_path, 'hyrax', 'image.jp2'), visible: false)
+        attach_file("files[]", File.join(fixture_path, 'hyrax', 'jp2_fits.xml'), visible: false)
       end
       click_link "Descriptions" # switch tab
       fill_in('Title', with: 'My Test Work')
       fill_in('Creator', with: 'Doe, Jane')
-      select('Collection', from: 'oer_resource_type')
+      select('Poster', from: 'oer_resource_type')
       fill_in('Date', with: '02/02/2020')
       select('Student', from: 'Audience')
       select('Community college / Lower division', from: 'Education Level')
       select('Syllabus', from: 'Learning Resource Type')
       select('Languages - Spanish', from: 'Discipline')
-      select('In Copyright', from: 'Rights Statement')
+      select('In Copyright', from: 'Rights')
 
       page.choose('oer_visibility_open')
       expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Public) may be viewed as publishing which could impact your ability to')
@@ -75,7 +75,7 @@ RSpec.feature 'Create a Oer', type: :feature, js: true, clean: true, cohort: 'al
 
       click_on('Save')
       expect(page).to have_content('My Test Work')
-      expect(page).to have_content "Your files are being processed by Hyku Commons in the background."
+      expect(page).to have_content("Your files are being processed by Hyku in the background.")
     end
     # rubocop:enable RSpec/ExampleLength
   end

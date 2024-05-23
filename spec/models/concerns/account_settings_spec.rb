@@ -37,7 +37,7 @@ RSpec.describe AccountSettings do
 
     context 'when is_superadmin is false' do
       it 'returns all settings except private, disabled, and superadmin settings' do
-        expect(AccountDecorator::SUPERADMIN_SETTINGS.size).to eq 7
+        expect(Account::superadmin_settings.size).to eq 7
         expect(account.public_settings(is_superadmin: false).keys.sort).to eq %i[allow_downloads
                                                                                  allow_signup
                                                                                  cache_api

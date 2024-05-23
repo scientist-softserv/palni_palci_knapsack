@@ -9,8 +9,6 @@ ENV BUNDLE_BUNDLER_INJECT__GEM_PATH=/app/samvera/bundler.d
 
 RUN bundle install --jobs "$(nproc)"
 
-RUN bundle install --jobs "$(nproc)"
-
 # Ensure root permissions for installing Tesseract data
 USER root
 

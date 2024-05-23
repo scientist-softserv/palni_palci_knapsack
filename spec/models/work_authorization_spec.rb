@@ -3,18 +3,20 @@ require 'spec_helper'
 require 'cancan/matchers'
 
 RSpec.describe WorkAuthorization, type: :model do
-  let(:work) { FactoryBot.create(:generic_work) }
-  let(:other_work) { FactoryBot.create(:generic_work) }
+  let(:work) { FactoryBot.valkyrie_create(:generic_work_resource, title: ['Work Title']) }
+  let(:other_work) { FactoryBot.valkyrie_create(:generic_work_resource, title: ['Other Work']) }
   let(:borrowing_user) { FactoryBot.create(:user) }
   let(:ability) { ::Ability.new(borrowing_user) }
   let(:group) { FactoryBot.create(:group, name: work.id) }
   let(:other_group) { FactoryBot.create(:group, name: other_work.id) }
 
   before do
-    work.read_groups = [group.name]
-    work.save
-    other_work.read_groups = [other_group.name]
-    other_work.save
+    acl = Hyrax::AccessControlList.new(resource: work)
+    acl.grant(:read).to(group)
+    acl.save
+    other_acl = Hyrax::AccessControlList.new(resource: other_work)
+    other_acl.grant(:read).to(other_group)
+    other_acl.save
   end
 
   describe '.extract_pids_from' do
@@ -61,11 +63,13 @@ RSpec.describe WorkAuthorization, type: :model do
       it 'will authorize the given work_pid and scope’s work' do
         given_scope = "http://pals.hyku.test/concern/generic_works/#{other_work.id}?locale=en openid"
 
-        expect do
-          expect do
-            described_class.handle_signin_for!(user: borrowing_user, work_pid: work.id, scope: given_scope, authorize_until: 1.day.from_now)
-          end.to change { ::Ability.new(borrowing_user).can?(:read, work.id) }.from(false).to(true)
-        end.to change { ::Ability.new(borrowing_user).can?(:read, other_work.id) }.from(false).to(true)
+        expect(Ability.new(borrowing_user).can?(:read, work.id)).to be_falsey
+        expect(Ability.new(borrowing_user).can?(:read, other_work.id)).to be_falsey
+
+        described_class.handle_signin_for!(user: borrowing_user, work_pid: work.id, scope: given_scope, authorize_until: 1.day.from_now)
+
+        expect(Ability.new(borrowing_user).can?(:read, Hyrax.query_service.find_by(id: work.id))).to be_truthy
+        expect(Ability.new(borrowing_user).can?(:read, Hyrax.query_service.find_by(id: other_work.id))).to be_truthy
       end
     end
 
@@ -74,11 +78,13 @@ RSpec.describe WorkAuthorization, type: :model do
         described_class.authorize!(user: borrowing_user, work: work, group: group, expires_at: 1.day.ago)
         described_class.authorize!(user: borrowing_user, work: other_work, group: other_group, expires_at: 1.day.ago)
 
-        expect do
-          expect do
-            described_class.handle_signin_for!(user: borrowing_user, work_pid: work.id, authorize_until: 1.day.from_now)
-          end.not_to change { ::Ability.new(borrowing_user).can?(:read, work.id) }.from(true)
-        end.to change { ::Ability.new(borrowing_user).can?(:read, other_work.id) }.from(true).to(false)
+        expect(Ability.new(borrowing_user).can?(:read, work)).to be_truthy
+        expect(Ability.new(borrowing_user).can?(:read, other_work)).to be_truthy
+
+        described_class.handle_signin_for!(user: borrowing_user, work_pid: work.id, authorize_until: 1.day.from_now)
+
+        expect(Ability.new(borrowing_user).can?(:read, Hyrax.query_service.find_by(id: work.id))).to be_truthy
+        expect(Ability.new(borrowing_user).can?(:read, Hyrax.query_service.find_by(id: other_work.id))).to be_falsey
       end
     end
 
@@ -89,22 +95,27 @@ RSpec.describe WorkAuthorization, type: :model do
         # Note: We'll be expiring this one.
         described_class.authorize!(user: borrowing_user, work: other_work, group: other_group, expires_at: 1.day.ago)
 
-        expect do
-          expect do
-            described_class.handle_signin_for!(user: borrowing_user, revoke_expirations_before: Time.zone.now)
-          end.not_to change { ::Ability.new(borrowing_user).can?(:read, work.id) }.from(true)
-        end.to change { ::Ability.new(borrowing_user).can?(:read, other_work.id) }.from(true).to(false)
+        expect(Ability.new(borrowing_user).can?(:read, work)).to be_truthy
+        expect(Ability.new(borrowing_user).can?(:read, other_work)).to be_truthy
+
+        described_class.handle_signin_for!(user: borrowing_user, revoke_expirations_before: Time.zone.now)
+
+        expect(Ability.new(borrowing_user).can?(:read, work)).to be_truthy
+        expect(Ability.new(borrowing_user).can?(:read, other_work)).to be_falsey
       end
     end
   end
 
   describe '.authorize!' do
     it 'gives the borrowing user the ability to "read" the work' do
-      # We re-instantiate an ability class because CanCan caches many of the ability checks.  By
-      # both passing the id and reinstantiating, we ensure that we have the most fresh data; that is
-      # no cached ability "table" nor cached values on the work.
-      expect { described_class.authorize!(user: borrowing_user, work: work, group: group) }
-        .to change { ::Ability.new(borrowing_user).can?(:read, work.id) }.from(false).to(true)
+      # # We re-instantiate an ability class because CanCan caches many of the ability checks.  By
+      # # both passing the id and reinstantiating, we ensure that we have the most fresh data; that is
+      # # no cached ability "table" nor cached values on the work.
+      # expect { described_class.authorize!(user: borrowing_user, work: Hyrax.query_service.find_by(id: work.id), group: group) }
+      #   .to change { ::Ability.new(borrowing_user).can?(:read, work.id) }.from(false).to(true)
+      expect(Ability.new(borrowing_user).can?(:read, work)).to be_falsey
+      described_class.authorize!(user: borrowing_user, work: Hyrax.query_service.find_by(id: work.id), group: group)
+      expect(Ability.new(borrowing_user).can?(:read, work)).to be_truthy
     end
   end
 

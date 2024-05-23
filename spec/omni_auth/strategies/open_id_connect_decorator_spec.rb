@@ -81,7 +81,7 @@ RSpec.describe OmniAuth::Strategies::OpenIDConnect do
     context 'source_location' do
       subject { options_method.source_location }
 
-      it { is_expected.to match_array([Rails.root.join('lib', 'omni_auth', 'strategies', 'open_id_connect_decorator.rb').to_s, Integer]) }
+      it { is_expected.to match_array([HykuKnapsack::Engine.root.join('lib', 'omni_auth', 'strategies', 'open_id_connect_decorator.rb').to_s, Integer]) }
     end
 
     context 'super_method' do

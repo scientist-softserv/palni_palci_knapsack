@@ -13,7 +13,7 @@ RSpec.describe 'Create a Etd', type: :feature, js: true, clean: true, cohort: 'b
     let(:admin_set_id) { Hyrax::AdminSetCreateService.find_or_create_default_admin_set.id.to_s }
     let(:permission_template) { Hyrax::PermissionTemplate.find_or_create_by!(source_id: admin_set_id) }
     let(:workflow) do
-      Sipity::Workflow.create!(active: true, name: 'test-workflow', permission_template: permission_template)
+      Sipity::Workflow.create!(active: true, name: 'test-workflow', permission_template:)
     end
 
     before do
@@ -22,7 +22,7 @@ RSpec.describe 'Create a Etd', type: :feature, js: true, clean: true, cohort: 'b
       create(:editors_group)
       create(:depositors_group)
       # Create a single action that can be taken
-      Sipity::WorkflowAction.create!(name: 'submit', workflow: workflow)
+      Sipity::WorkflowAction.create!(name: 'submit', workflow:)
 
       # Grant the user access to deposit into the admin set.
       Hyrax::PermissionTemplateAccess.create!(
@@ -46,13 +46,13 @@ RSpec.describe 'Create a Etd', type: :feature, js: true, clean: true, cohort: 'b
       choose "payload_concern", option: "Etd"
       click_button "Create work"
 
-      expect(page).to have_content "Add New ETD"
+      expect(page).to have_content(/Add New ETD/i)
       click_link "Files" # switch tab
       expect(page).to have_content "Add files"
       expect(page).to have_content "Add folder"
       within('div#add-files') do
-        attach_file("files[]", Rails.root.join('spec', 'fixtures', 'hyrax', 'image.jp2'), visible: false)
-        attach_file("files[]", Rails.root.join('spec', 'fixtures', 'hyrax', 'jp2_fits.xml'), visible: false)
+        attach_file("files[]", File.join(fixture_path, 'hyrax', 'image.jp2'), visible: false)
+        attach_file("files[]", File.join(fixture_path, 'hyrax', 'jp2_fits.xml'), visible: false)
       end
       expect(page).to have_selector(:link_or_button, 'Delete') # Wait for files to finish uploading
 
@@ -62,7 +62,10 @@ RSpec.describe 'Create a Etd', type: :feature, js: true, clean: true, cohort: 'b
       fill_in('Keyword', with: 'testing')
       select('In Copyright', from: 'Rights')
       fill_in('Date', with: '01/27/2021')
-      fill_in('Degree', with: 'CS')
+      fill_in('Degree Name', with: 'Bachelor of Science')
+      fill_in('Degree Level', with: 'Undergraduate')
+      fill_in('Degree Discipline', with: 'Computer Science')
+      fill_in('Degree Grantor', with: 'University of Technology')
       fill_in('Level', with: 'High')
       fill_in('Discipline', with: 'Com Sci')
       fill_in('Grantor', with: 'PALNI/PALCI')
@@ -74,7 +77,7 @@ RSpec.describe 'Create a Etd', type: :feature, js: true, clean: true, cohort: 'b
 
       click_on('Save')
       expect(page).to have_content('My Test Work')
-      expect(page).to have_content "Your files are being processed by Hyku Commons in the background."
+      expect(page).to have_content("Your files are being processed by Hyku in the background.")
     end
   end
 end
