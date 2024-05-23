@@ -18,7 +18,7 @@ module Users
         # the scope to handle this.
         #
         # Related to OmniAuth::Strategies::OpenIDConnectDecorator
-        url = WorkAuthorization.url_from(scope: params[:scope], request: request)
+        url = WorkAuthorization.url_from(scope: params[:scope], request:)
         store_location_for(:user, url) if url
 
         # We need to render a loading page here just to set the session properly
@@ -38,7 +38,7 @@ module Users
     alias saml callback
 
     def passthru
-      render status: 404, plain: 'Not found. Authentication passthru.'
+      render status: :not_found, plain: 'Not found. Authentication passthru.'
     end
 
     def failure

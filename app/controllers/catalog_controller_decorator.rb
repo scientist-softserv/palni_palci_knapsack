@@ -43,7 +43,6 @@ CatalogController.configure_blacklight do |config|
   config.add_facet_field 'member_of_collections_ssim', limit: 5, label: 'Collections'
   config.add_facet_field 'account_institution_name_ssim', label: 'Institution', limit: 5
 
-
   config.index_fields.clear
 
   config.add_index_field 'all_text_tsimv', highlight: true, helper_method: :render_ocr_snippets
@@ -99,7 +98,6 @@ CatalogController.configure_blacklight do |config|
   config.add_show_field solr_name('contributing_library', :stored_searchable)
   config.add_show_field solr_name('library_catalog_identifier', :stored_searchable)
   config.add_show_field solr_name('chronology_note', :stored_searchable)
-
 
   # list of all the search_fields that will use the default configuration below.
   search_fields_without_customization = [

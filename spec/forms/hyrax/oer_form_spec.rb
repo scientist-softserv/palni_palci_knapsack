@@ -50,9 +50,7 @@ RSpec.describe Hyrax::OerForm do
       expect(subject['accessibility_feature']).to eq ['Alternative Text']
       expect(subject['accessibility_hazard']).to eq ['Flashing']
     end
-
   end
 
   include_examples("work_form")
-
 end

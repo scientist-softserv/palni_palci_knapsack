@@ -39,7 +39,7 @@ RSpec.describe WorkAuthorization, type: :model do
 
   # rubocop:disable Metrics/LineLength
   describe '.url_from' do
-    subject { described_class.url_from(scope: given_test_scope, request: request) }
+    subject { described_class.url_from(scope: given_test_scope, request:) }
 
     let(:request) { double(ActionDispatch::Request, env: { 'rack.url_scheme' => "http" }, host_with_port: "pals.hyku.test") }
 
@@ -75,7 +75,7 @@ RSpec.describe WorkAuthorization, type: :model do
 
     context 'when given a work_pid' do
       it 'will re-authorize the given work and expire non-specified works' do
-        described_class.authorize!(user: borrowing_user, work: work, group: group, expires_at: 1.day.ago)
+        described_class.authorize!(user: borrowing_user, work:, group:, expires_at: 1.day.ago)
         described_class.authorize!(user: borrowing_user, work: other_work, group: other_group, expires_at: 1.day.ago)
 
         expect(Ability.new(borrowing_user).can?(:read, work)).to be_truthy
@@ -90,9 +90,9 @@ RSpec.describe WorkAuthorization, type: :model do
 
     context 'when not given a work_pid' do
       it 'will de-authorize all authorizations that have expired but not those that have not expired' do
-        # Note: This one is expiring in the future
-        described_class.authorize!(user: borrowing_user, work: work, group: group, expires_at: 2.days.from_now)
-        # Note: We'll be expiring this one.
+        # NOTE: This one is expiring in the future
+        described_class.authorize!(user: borrowing_user, work:, group:, expires_at: 2.days.from_now)
+        # NOTE: We'll be expiring this one.
         described_class.authorize!(user: borrowing_user, work: other_work, group: other_group, expires_at: 1.day.ago)
 
         expect(Ability.new(borrowing_user).can?(:read, work)).to be_truthy
@@ -114,7 +114,7 @@ RSpec.describe WorkAuthorization, type: :model do
       # expect { described_class.authorize!(user: borrowing_user, work: Hyrax.query_service.find_by(id: work.id), group: group) }
       #   .to change { ::Ability.new(borrowing_user).can?(:read, work.id) }.from(false).to(true)
       expect(Ability.new(borrowing_user).can?(:read, work)).to be_falsey
-      described_class.authorize!(user: borrowing_user, work: Hyrax.query_service.find_by(id: work.id), group: group)
+      described_class.authorize!(user: borrowing_user, work: Hyrax.query_service.find_by(id: work.id), group:)
       expect(Ability.new(borrowing_user).can?(:read, work)).to be_truthy
     end
   end
@@ -122,14 +122,14 @@ RSpec.describe WorkAuthorization, type: :model do
   describe '.revoke!' do
     it 'revokes an authorized user from being able to "read" the work' do
       # Ensuring we're authorized
-      described_class.authorize!(user: borrowing_user, work: work, group: group)
+      described_class.authorize!(user: borrowing_user, work:, group:)
 
-      expect { described_class.revoke!(user: borrowing_user, work: work) }
+      expect { described_class.revoke!(user: borrowing_user, work:) }
         .to change { ::Ability.new(borrowing_user).can?(:read, work) }.from(true).to(false)
     end
 
     it 'gracefully handles revoking that which was never authorized' do
-      expect { described_class.revoke!(user: borrowing_user, work: work) }
+      expect { described_class.revoke!(user: borrowing_user, work:) }
         .not_to change { ::Ability.new(borrowing_user).can?(:read, work) }.from(false)
     end
   end

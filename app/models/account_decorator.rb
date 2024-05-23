@@ -8,7 +8,8 @@ Account.superadmin_settings = %i[
   file_size_limit
   oai_prefix
   oai_sample_identifier
-  s3_bucket].freeze
+  s3_bucket
+].freeze
 
 # TODO: Does redeclaring this work?  We'll want to write a test for this.
 Account.setting :contact_email, type: 'string', default: 'consortial-ir@palci.org'

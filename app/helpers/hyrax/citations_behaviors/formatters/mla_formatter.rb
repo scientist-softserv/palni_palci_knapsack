@@ -19,11 +19,11 @@ module Hyrax
           text += format_title(title_info)
 
           # Hyrax Override: adds contributor
-          text += " #{work.contributor.join(', ')}." unless work.contributor.blank?
+          text += " #{work.contributor.join(', ')}." if work.contributor.present?
 
           # Publication
           pub_info = clean_end_punctuation(setup_pub_info(work, true))
-          text += "<span class=\"citation-publication-info\">#{pub_info}. </span>" unless pub_info.blank?
+          text += "<span class=\"citation-publication-info\">#{pub_info}. </span>" if pub_info.present?
           # text += (pub_info + ".") if pub_info.present?
 
           # Hyrax Override: adds addtl content for citation

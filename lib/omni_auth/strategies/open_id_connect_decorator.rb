@@ -134,7 +134,7 @@ module OmniAuth
         request = ActionDispatch::Request.new(Rails.application.env_config.merge(env))
         request.cookie_jar[:reshare_url].presence ||
           session["user_return_to"].presence ||
-          WorkAuthorization.url_from(scope: params['scope'], request: request)
+          WorkAuthorization.url_from(scope: params['scope'], request:)
       end
     end
   end

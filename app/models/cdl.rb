@@ -57,13 +57,13 @@ class Cdl < ActiveFedora::Base
 
   private
 
-    def destroy_cdl_group
-      DestroyCdlGroupJob.perform_later(id)
-    end
+  def destroy_cdl_group
+    DestroyCdlGroupJob.perform_later(id)
+  end
 
-    def destroy_split_pages
-      members.each do |member|
-        DestroySplitPagesJob.perform_later(member.id)
-      end
+  def destroy_split_pages
+    members.each do |member|
+      DestroySplitPagesJob.perform_later(member.id)
     end
+  end
 end

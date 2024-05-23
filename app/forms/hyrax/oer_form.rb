@@ -17,7 +17,7 @@ module Hyrax
                     date_created files visibility_during_embargo embargo_release_date visibility_after_embargo
                     visibility_during_lease lease_expiration_date visibility_after_lease visibility
                     ordered_member_ids in_works_ids member_of_collection_ids admin_set_id abstract]
-    self.terms -=%i[previous_version_id newer_version_id alternate_version_id related_item_id]
+    self.terms -= %i[previous_version_id newer_version_id alternate_version_id related_item_id]
     self.required_fields = %i[title creator resource_type date_created audience education_level learning_resource_type
                               discipline rights_statement]
 

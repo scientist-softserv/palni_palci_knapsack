@@ -5,8 +5,8 @@ class AddWorkAuthorizations < ActiveRecord::Migration[6.1]
       t.belongs_to "user"
       t.datetime "expires_at", index: true
       t.string   "work_pid", index: true, null: false
-      t.string  "scope"
-      t.string   "error", default: nil
+      t.string "scope"
+      t.string "error", default: nil
       t.timestamps
     end
   end

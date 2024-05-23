@@ -22,7 +22,7 @@ module Hyrax
       :department,
       :creator,
       :additional_information,
-      :bibliographic_citation,
+      :bibliographic_citation
     ]
 
     self.required_fields = [

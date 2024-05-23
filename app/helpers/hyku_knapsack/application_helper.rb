@@ -28,7 +28,7 @@ module HykuKnapsack
       # scheme.
       "//#{cross_tenant_search_host}/catalog"
     end
-    
+
     ##
     # @api private
     #
@@ -37,7 +37,7 @@ module HykuKnapsack
       # I'm providing quite a few fallbacks, as this URL is used on the first page you'll see in a
       # new Hyku instance.
       ENV["HYKU_CROSS_TENANT_SEARCH_HOST"].presence ||
-      Account.where(search_only: true).limit(1).pluck(:cname)&.first ||
+        Account.where(search_only: true).limit(1).pluck(:cname)&.first ||
         "search.hykucommons.org"
     end
   end

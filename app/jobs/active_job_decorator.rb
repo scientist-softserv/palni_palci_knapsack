@@ -6,7 +6,7 @@ module ActiveJobDecorator
 
   class_methods do
     def deserialize(job_data)
-      Raven.extra_context(job_data: job_data)
+      Raven.extra_context(job_data:)
       super
     end
   end

@@ -390,7 +390,7 @@ module Blacklight
     ##
     # Open Search discovery tag for HTML <head> links
     def opensearch_description_tag(title, href)
-      tag :link, href: href, title: title, type: "application/opensearchdescription+xml", rel: "search"
+      tag.link(href:, title:, type: "application/opensearchdescription+xml", rel: "search")
     end
 
     # OVERIDE: Blacklight::UrlHelperBehavior:
