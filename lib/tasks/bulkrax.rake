@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 namespace :bulkrax do
   desc "reclassify OerCsvParser's and EtdCsvParser's to CsvParser's"
   task single_csv_parser: :environment do

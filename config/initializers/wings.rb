@@ -3,7 +3,7 @@
 
 Rails.application.config.after_initialize do
   # Add all concerns that are migrating from ActiveFedora here
-  CONCERNS = [Cdl, Etd, GenericWork, Image, Oer]
+  CONCERNS = [Cdl, Etd, GenericWork, Image, Oer].freeze
 
   CONCERNS.each do |klass|
     Wings::ModelRegistry.register("#{klass}Resource".constantize, klass)

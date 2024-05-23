@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Hyrax
   module AudienceService
     mattr_accessor :authority

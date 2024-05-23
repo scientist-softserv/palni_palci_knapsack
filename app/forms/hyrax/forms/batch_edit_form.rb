@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ## Override from Hyrax 2.5 to remove description and resource_type
 ## those fields are different in OER and can therefor not be bulk edited
 module Hyrax

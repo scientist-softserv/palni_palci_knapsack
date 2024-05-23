@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Hyrax
   module EducationLevelsService
     mattr_accessor :authority

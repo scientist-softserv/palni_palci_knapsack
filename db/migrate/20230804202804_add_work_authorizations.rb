@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddWorkAuthorizations < ActiveRecord::Migration[6.1]
   def change
     create_table "work_authorizations", force: :cascade do |t|

@@ -36,7 +36,7 @@ module Hyrax
 
         def format_authors(authors_list = [])
           return '' if authors_list.blank?
-          authors_list = Array.wrap(authors_list).collect { |name| name.strip }
+          authors_list = Array.wrap(authors_list).collect(&:strip)
           text = ''
           text += convert_to_initials(authors_list.first) if authors_list.first
           authors_list[1..-1].each do |author|

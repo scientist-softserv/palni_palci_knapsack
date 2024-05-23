@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Helper methods for the have_property matcher defined below.
 # These helpers keep the matcher itself cleaner.
 module HavePropertyHelpers

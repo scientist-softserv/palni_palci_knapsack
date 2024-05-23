@@ -33,7 +33,7 @@ class OerResourceForm < Hyrax::Forms::ResourceForm(OerResource)
   end
 
   def previous_version_json
-    return unless previous_version.present?
+    return if previous_version.blank?
 
     previous_version.map do |child|
       {
@@ -46,7 +46,7 @@ class OerResourceForm < Hyrax::Forms::ResourceForm(OerResource)
   end
 
   def newer_version_json
-    return unless newer_version.present?
+    return if newer_version.blank?
 
     newer_version.map do |child|
       {
@@ -59,7 +59,7 @@ class OerResourceForm < Hyrax::Forms::ResourceForm(OerResource)
   end
 
   def alternate_version_json
-    return unless alternate_version.present?
+    return if alternate_version.blank?
 
     alternate_version.map do |child|
       {
@@ -72,7 +72,7 @@ class OerResourceForm < Hyrax::Forms::ResourceForm(OerResource)
   end
 
   def related_item_json
-    return unless related_item.present?
+    return if related_item.blank?
 
     related_item.map do |child|
       {

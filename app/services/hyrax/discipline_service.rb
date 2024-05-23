@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Hyrax
   module DisciplineService
     mattr_accessor :authority

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RSpec.describe Hyrax::AccessibilityFeaturesService do
   describe ".select_all_options" do
     subject { described_class.select_all_options }
