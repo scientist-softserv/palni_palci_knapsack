@@ -256,8 +256,9 @@ en:
             one: There is <b>%{count} user</b> in this repository.
             other: There are <b>%{count} users</b> in this repository.
           id_label: Username
-          role_label: Roles
           group_label: Groups
+          group_role_label: Group roles
+          site_role_label: Site roles
           title: Manage Users
           reader_title: View Users
       workflow_roles:
@@ -376,6 +377,8 @@ en:
         title: Title
         unauthorized: There are no publicly available items in this %{type}.
         visibility: Visibility
+      part_of:
+        label: "Part of:"
       relationships:
         empty: This %{type} is not currently in any collections.
         header: Relationships
@@ -1148,6 +1151,7 @@ en:
         resource_type: Pre-defined categories to describe the type of content being uploaded, such as &quot;article&quot; or &quot;dataset.&quot;  More than one type may be selected.
         subject: Headings or index terms describing what the work is about; these do need to conform to an existing vocabulary.
         title: A name to aid in identifying a work.
+        video_embed: "If you enter an embed link for a video, it must be a properly formatted url beginning with 'http://' or 'https://'. It also needs to contain a valid link to a hosted video that can appear in an iframe. <br /><br /><i>Examples:<br/>https://player.vimeo.com/video/467264493?h=b089de0eab<br/>https://www.youtube.com/embed/Znf73dsFdC8</i>"
     labels:
       collection:
         size: Size

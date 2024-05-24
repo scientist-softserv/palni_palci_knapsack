@@ -20,11 +20,11 @@ HTML Properties:
                     'autocomplete-url' => Rails.application.routes.url_helpers.qa_path + '/search/find_works',
                     'exclude-work': f.object.model.id #exclude this item from the result set.
                   } %>
-      <a href="#" onclick="return false;" class="btn btn-primary" data-behavior="add-relationship"><%= t('.add') %></a>
+      <a href="#" onclick="return false;" class="btn btn-secondary ml-2" data-behavior="add-relationship"><%= t('.add') %></a>
   </div>
 
   <div class="message has-warning hidden"></div>
-  
+
   <table class="table table-striped">
     <caption><%= t('.caption') %></caption>
     <thead>
