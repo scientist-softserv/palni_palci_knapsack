@@ -147,7 +147,7 @@ extraEnvVars: &envVars
   - name: NEGATIVE_CAPTCHA_SECRET
     value: $NEGATIVE_CAPTCHA_SECRET
   - name: RAILS_CACHE_STORE_URL
-    value: redis://:$REDIS_PASSWORD@staging-redis-master:6379/staging
+    value: redis://:$REDIS_PASSWORD@palni-palci-knapsack-staging-redis-master:6379/0
   - name: RAILS_ENV
     value: production
   - name: RAILS_LOG_TO_STDOUT
@@ -157,9 +157,9 @@ extraEnvVars: &envVars
   - name: RAILS_SERVE_STATIC_FILES
     value: "true"
   - name: REDIS_HOST
-    value: staging-redis-master
+    value: palni-palci-knapsack-staging-redis-master
   - name: REDIS_URL
-    value: redis://:$REDIS_PASSWORD@staging-redis-master:6379/staging
+    value: redis://:$REDIS_PASSWORD@palni-palci-knapsack-staging-redis-master:6379/0
   - name: SENTRY_DSN
     value: $SENTRY_DSN
   - name: SENTRY_ENVIRONMENT
@@ -400,7 +400,9 @@ externalFcrepoHost: fcrepo.staging-fcrepo.svc.cluster.local
 externalPostgresql:
   host: pg-postgresql.staging-postgres.svc.cluster.local
   username: postgres
+  database: palni-palci-staging
   password: $DB_PASSWORD
+  
 
 externalSolrHost: solr.staging-solr.svc.cluster.local
 externalSolrUser: admin
