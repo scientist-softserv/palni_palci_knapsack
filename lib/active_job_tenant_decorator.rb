@@ -11,7 +11,7 @@ module ActiveJobTenantDecorator
 
   module ClassMethods
     def deserialize(job_data)
-      Raven.extra_context(job_data:)
+      Sentry.set_extras(job_data:)
       super.tap do |job|
         job.tenant = job_data['tenant']
         job.current_account = nil
