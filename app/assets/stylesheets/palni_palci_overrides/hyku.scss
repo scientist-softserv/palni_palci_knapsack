@@ -1,0 +1,169 @@
+.splash {
+  #banner h1,
+  #content-wrapper h2 {
+    line-height: 4rem;
+    margin-top: 1rem;
+  }
+
+  #masthead.navbar.navbar-expand-lg.navbar-dark.bg-dark.justify-content-between {
+    background-color: #439627 !important;
+    border-color: #a0ce4e !important;
+  }
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.product-features {
+  font-family: $primary-font-family;
+  padding: 20px;
+  background: initial;
+  border-top: initial;
+
+  .heading {
+    color: $gray;
+    font-size: 1.4em;
+  }
+
+  p {
+    font-size: 1em;
+    line-height: 1.5em;
+  }
+}
+
+.splash.splash-index {
+  font-family: $splash-font-family;
+
+  .splash-logo {
+    background: image_url("Hyku_Commons_Logo.png") no-repeat;
+    background-size: contain;
+    height: 120px;
+  }
+  #banner {
+    background-color: #f6f6f6;
+    padding: 16px;
+    border: 0;
+    font-family: $splash-font-family;
+    margin-bottom: 0;
+  }
+
+  h1 {
+    font-family: $splash-font-family;
+    color: $jumbotron-heading-color;
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  h3 {
+    font-family: $splash-font-family;
+    color: $jumbotron-sub-heading-color;
+    font-size: 1.6em;
+    font-weight: 400;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+
+  h2 {
+    font-family: $splash-font-family;
+    color: $jumbotron-sub-heading-color;
+    font-weight: 400;
+    font-size: 20px;
+  }
+
+  .navbar {
+    margin-bottom: 0;
+  }
+
+  #masthead.navbar-inverse.navbar-static-top {
+    background-color: #439627;
+    border-color: #a0ce4e;
+  }
+
+  .img-thumbnail {
+    border: none;
+    border-radius: 0;
+    height: 150px;
+    width: auto;
+  }
+
+  .product-features {
+    .accounts-row {
+      a:hover, a:focus {
+        text-decoration: none;
+      }
+    }
+    img {
+      height: 120px;
+      width: auto;
+      margin: 16px;
+    }
+  }
+
+  .consortia-logos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    width: 100%;
+    box-sizing: border-box;
+    .img-responsive {
+      padding: 16px;
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  .partnering-consortia, .splash-footer {
+    padding: 16px;
+  }
+
+  .imls-logo {
+    max-width:45%;
+  }
+  .splash-footer {
+    p {
+      font-size: 16px;
+    }
+  }
+  .splash-footer-links {
+    ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: flex-start;
+      padding-inline-start: 0;
+      li {
+        padding: 20px 20px 20px 0;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .btn-sign-up {
+    @include button-variant(
+      $classic-white,
+      $jumbotron-button-background-color,
+      $jumbotron-button-background-color
+    );
+    border-radius: 3px;
+    font-size: 0.7em;
+    margin-top: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+.splash-footer-license {
+  display: flex;
+  padding: 0;
+  justify-content: space-between;
+
+  .navbar-right > .text-right {
+    margin-right: 1rem;
+  }
+}
+
+body.splash.splash-index.public-facing.default_home.list_view.default_show {
+  margin-bottom: 0;
+}
