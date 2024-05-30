@@ -11,6 +11,7 @@ module Blacklight
     include Blacklight::RenderConstraintsHelperBehavior
     include Blacklight::RenderPartialsHelperBehavior
     include Blacklight::FacetsHelperBehavior
+    include Blacklight::IconHelperBehavior
     extend Deprecation
     self.deprecation_horizon = 'Blacklight version 7.0.0'
 
