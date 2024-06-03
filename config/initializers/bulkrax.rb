@@ -139,11 +139,6 @@ Rails.application.config.after_initialize do
 
     # Properties that should not be used in imports/exports. They are reserved for use by Hyrax.
     # config.reserved_properties += ['my_field']
-
-    # Sidebar for hyrax 3+ support
-    if Object.const_defined?(:Hyrax) && ::Hyrax::DashboardController&.respond_to?(:sidebar_partials)
-      Hyrax::DashboardController.sidebar_partials[:repository_content] << "hyrax/dashboard/sidebar/bulkrax_sidebar_additions"
-    end
   end
 end
 # rubocop:enable Metrics/BlockLength
