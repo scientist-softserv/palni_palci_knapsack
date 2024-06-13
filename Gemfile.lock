@@ -212,10 +212,10 @@ GIT
 
 GIT
   remote: https://github.com/scientist-softserv/iiif_print.git
-  revision: 805191e6caedf2b5b91eb4e0aad692d4aff871c1
+  revision: 6751159344321bcd63b504b2e8a4fe22a9b2343a
   branch: main
   specs:
-    iiif_print (2.0.0)
+    iiif_print (2.0.1)
       blacklight_iiif_search (>= 1.0, < 3.0)
       derivative-rodeo (~> 0.5)
       hyrax (>= 2.5, < 6)
@@ -1578,4 +1578,4 @@ DEPENDENCIES
   willow_sword!
 
 BUNDLED WITH
-   2.5.10
+   2.4.21
