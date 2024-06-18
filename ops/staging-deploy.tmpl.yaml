@@ -22,7 +22,7 @@ uploadsVolume:
   size: 200Gi
 
 imagePullSecrets:
- - name: github
+  - name: github
 
 extraVolumeMounts: &volMounts
   - name: uploads
