@@ -65,7 +65,7 @@ Rails.application.config.after_initialize do
       'audience' => { from: ['audience'], split: '\|' },
       'based_near' => { from: ['location'], split: '\|' },
       'bibliographic_citation' => { from: ['bibliographic_citation'], split: '\|', generated: true },
-      'bulkrax_identifier' => { from: ['source_identifier'], source_identifier: true, generated: true },
+      'bulkrax_identifier' => { from: ['source_identifier'], source_identifier: true, generated: true, search_field: 'bulkrax_identifier_tesim' },
       'children' => { from: ['children'], split: /\s*[;|]\s*/, related_children_field_mapping: true },
       'chronology_note' => { from: ['chronology_note'], split: '\|' },
       'committee_member' => { from: ['committee_member'], split: '\|' },
