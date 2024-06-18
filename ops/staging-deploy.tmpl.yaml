@@ -96,18 +96,10 @@ extraEnvVars: &envVars
     value: rest
   - name: GOOGLE_ANALYTICS_ID
     value: $GOOGLE_ANALYTICS_ID
-  - name: GOOGLE_OAUTH_APP_NAME
-    value: hyku_staging
-  - name: GOOGLE_OAUTH_APP_VERSION
-    value: '1.0'
-  - name: GOOGLE_OAUTH_CLIENT_EMAIL
-    value: hyku-demo@REPLACE_ME
-  - name: GOOGLE_OAUTH_PRIVATE_KEY_PATH
-    value: prod-cred.p12
-  - name: GOOGLE_OAUTH_PRIVATE_KEY_SECRET
-    value: $GOOGLE_OAUTH_PRIVATE_KEY_SECRET
-  - name: GOOGLE_OAUTH_PRIVATE_KEY_VALUE
-    value: $GOOGLE_OAUTH_PRIVATE_KEY_VALUE
+  - name: GOOGLE_ANALYTICS_PROPERTY_ID
+    value: $GOOGLE_ANALYTICS_PROPERTY_ID
+  - name: GOOGLE_ACCOUNT_JSON
+    value: $GOOGLE_ACCOUNT_JSON
   - name: HYKU_ADMIN_HOST
     value: palni-palci-staging.notch8.cloud
   - name: HYKU_ADMIN_ONLY_TENANT_CREATION
@@ -131,7 +123,9 @@ extraEnvVars: &envVars
   - name: HYRAX_ACTIVE_JOB_QUEUE
     value: sidekiq
   - name: HYRAX_ANALYTICS
-    value: "false"
+    value: "true"
+  - name: HYRAX_ANALYTICS_PROVIDER
+    value: 'ga4'
   - name: HYRAX_FITS_PATH
     value: /app/fits/fits.sh
   - name: HYRAX_VALKYRIE
@@ -404,7 +398,7 @@ externalPostgresql:
   username: postgres
   database: palni-palci-staging
   password: $DB_PASSWORD
-  
+
 
 externalSolrHost: solr.staging-solr.svc.cluster.local
 externalSolrUser: admin
