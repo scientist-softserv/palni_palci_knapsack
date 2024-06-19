@@ -78,10 +78,10 @@ module Hyrax
           def account_json_string
             return @account_json_string if @account_json_string
             @account_json_string = if @config['account_json']
-              base64?(@config['account_json']) ? Base64.decode64(@config['account_json']) : @config['account_json']
-            else
-              File.read(@config['account_json_path'])
-            end
+                                     base64?(@config['account_json']) ? Base64.decode64(@config['account_json']) : @config['account_json']
+                                   else
+                                     File.read(@config['account_json_path'])
+                                   end
           end
 
           def account_info
@@ -176,31 +176,31 @@ module Hyrax
 
         def new_visitors(period = 'month', date = default_date_range)
           start_date, end_date = date_period(period, date)
-          Visits.new(start_date: start_date, end_date: end_date).new_visits
+          Visits.new(start_date:, end_date:).new_visits
         end
 
         def new_visits_by_day(date = default_date_range, period = 'range')
           start_date, end_date = date_period(period, date)
-          VisitsDaily.new(start_date: start_date, end_date: end_date).new_visits
+          VisitsDaily.new(start_date:, end_date:).new_visits
         end
 
         def returning_visitors(period = 'month', date = default_date_range)
           start_date, end_date = date_period(period, date)
-          Visits.new(start_date: start_date, end_date: end_date).return_visits
+          Visits.new(start_date:, end_date:).return_visits
         end
 
         def returning_visits_by_day(date = default_date_range, period = 'range')
           start_date, end_date = date_period(period, date)
-          VisitsDaily.new(start_date: start_date, end_date: end_date).return_visits
+          VisitsDaily.new(start_date:, end_date:).return_visits
         end
 
         def total_visitors(period = 'month', date = default_date_range)
           start_date, end_date = date_period(period, date)
-          Visits.new(start_date: start_date, end_date: end_date).total_visits
+          Visits.new(start_date:, end_date:).total_visits
         end
 
         def page_statistics(start_date, object)
-          visits = VisitsDaily.new(start_date: start_date, end_date: Date.yesterday)
+          visits = VisitsDaily.new(start_date:, end_date: Date.yesterday)
           visits.add_filter(dimension: 'contentId', values: [object.id.to_s])
           visits.total_visits
         end
