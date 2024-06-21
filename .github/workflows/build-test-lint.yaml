@@ -26,10 +26,25 @@ jobs:
 
   test:
     needs: build
-    uses: scientist-softserv/actions/.github/workflows/test.yaml@v0.0.22
-    with:
-      confdir: '/app/samvera/hyrax-webapp/solr/conf'
-      rspec_cmd: "cd .. && gem install semaphore_test_boosters && bundle && rspec_booster --job $CI_NODE_INDEX/$CI_NODE_TOTAL"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.2' 
+    - name: Install tmate
+      run: sudo apt-get install -y tmate
+    - name: Run tmate session
+      run: |
+        tmate -S /tmp/tmate.sock new-session -d
+        tmate -S /tmp/tmate.sock wait tmate-ready
+        echo "SSH to the runner: $(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')"
+        echo "Web to the runner: $(tmate -S /tmp/tmate.sock display -p '#{tmate_web}')"
+    - name: Install dependencies
+      run: gem install semaphore_test_boosters && bundle install
+    - name: Run tests
+      run: rspec_booster --job $CI_NODE_INDEX/$CI_NODE_TOTAL
 
   lint:
     needs: build
