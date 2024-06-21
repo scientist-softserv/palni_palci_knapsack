@@ -2,6 +2,8 @@
 
 module HykuKnapsack
   module ApplicationHelper
+    include Hyrax::OverrideHelperBehavior
+
     # OVERRIDE Hyrax::FileSetHelper#media_display_partial
     #
     # changed from hyrax 3.4.1 to change audio and video items to use default partial
