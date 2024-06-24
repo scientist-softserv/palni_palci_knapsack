@@ -94,6 +94,14 @@ GIT
       thor (~> 1.0)
 
 GIT
+  remote: https://github.com/samvera-labs/hyku_knapsack.git
+  revision: 5a7c54cace96881a3963ab2fd881ca6ea3f57372
+  branch: required_for_knapsack_instances
+  specs:
+    hyku_knapsack (0.0.1)
+      rails (>= 5.2.0)
+
+GIT
   remote: https://github.com/samvera-labs/hyrax-doi.git
   revision: 9b7ab7f8054a14385b838de1118f55ad2e0f5da8
   branch: rails_hyrax_upgrade
@@ -117,10 +125,10 @@ GIT
 
 GIT
   remote: https://github.com/samvera/bulkrax.git
-  revision: d8f9b85a9064b352a252c5deb590a430ca4a738e
+  revision: c58f8707905092dcbc410ed818230d4af165c24b
   branch: main
   specs:
-    bulkrax (8.0.0)
+    bulkrax (8.1.0)
       bagit (~> 0.4.6)
       coderay
       denormalize_fields
@@ -139,7 +147,7 @@ GIT
 
 GIT
   remote: https://github.com/samvera/hyrax.git
-  revision: 74f29943d88749a57077818d271b29729a6d7183
+  revision: 6447872e0bcea17abfc1aab477f2eea57639298f
   branch: double_combo
   specs:
     hyrax (5.0.1)
@@ -212,7 +220,7 @@ GIT
 
 GIT
   remote: https://github.com/scientist-softserv/iiif_print.git
-  revision: 6751159344321bcd63b504b2e8a4fe22a9b2343a
+  revision: fb07dcdafdf1b2e7e05ebd34a50187bf69b46474
   branch: main
   specs:
     iiif_print (2.0.1)
@@ -241,12 +249,6 @@ GIT
       addressable (~> 2.3)
       nokogiri (~> 1.5)
       omniauth (>= 1.2, < 3)
-
-PATH
-  remote: .
-  specs:
-    hyku_knapsack (0.0.1)
-      rails (>= 5.2.0)
 
 GEM
   remote: https://rubygems.org/
