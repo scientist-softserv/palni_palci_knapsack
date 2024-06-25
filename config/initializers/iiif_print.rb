@@ -26,8 +26,7 @@ IiifPrint.config do |config|
     {
       admin_set_id: admin_set_id.to_s,
       creator: parent_work.creator.to_a,
-      keyword: parent_work.keyword.to_a,
-      resource_type: parent_work.resource_type.to_a,
+      keyword: parent_work.keyword,
       rights_statement: parent_work.rights_statement.to_a,
       is_child: true
     }
