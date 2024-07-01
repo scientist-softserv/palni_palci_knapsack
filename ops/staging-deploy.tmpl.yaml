@@ -376,7 +376,18 @@ leaseRelease:
   enabled: false
 
 fcrepo:
-  enabled: false
+  enabled: true
+  servicePort: 8080
+  postgresql:
+    enabled: true
+    image:
+      repository: bitnami/postgresql
+      tag: 12.17.0-debian-11-r28
+  s3:
+    enabled: true
+    bucket: besties-fcrepo-clone
+    access_key: $AWS_ACCESS_KEY_ID
+    secret_key: $AWS_SECRET_ACCESS_KEY
 postgresql:
   enabled: false
 redis:
@@ -391,14 +402,11 @@ fits:
   servicePort: 8080
   subPath: /fits
 
-externalFcrepoHost: fcrepo.staging-fcrepo.svc.cluster.local
-
 externalPostgresql:
   host: pg-postgresql.staging-postgres.svc.cluster.local
   username: postgres
   database: palni-palci-staging
   password: $DB_PASSWORD
-
 
 externalSolrHost: solr.staging-solr.svc.cluster.local
 externalSolrUser: admin
