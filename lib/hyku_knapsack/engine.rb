@@ -88,6 +88,14 @@ module HykuKnapsack
       # underlying application and even other engines might have further amended the load path.
       # This is our "best" chance to do it at the latest possible moment.
       HykuKnapsack::Engine.load_translations!
+
+      # The `HykuKnapsack::NestedWorks` redefines the `valid_child_concerns` method to evalute
+      # the Hyrax.config.curation_concerns at runtime.  In Hyrax, the `valid_child_concerns`
+      # is defined via a `class_attribute` which seems to get set at time of initializing which
+      # at the time it gets set, the Knapsack additional curation concerns are not added.
+      Hyrax.config.curation_concerns.each do |concern|
+        concern.include HykuKnapsack::NestedWorks
+      end
     end
   end
 end
