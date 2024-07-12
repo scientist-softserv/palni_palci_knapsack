@@ -4,10 +4,6 @@
 Rails.application.config.after_initialize do
   Hyrax.config do |config|
     # TODO: Valkyrize models and update this initializer
-    # Injected via `rails g hyrax:work Oer`
-    config.register_curation_concern :oer
-    # Injected via `rails g hyrax:work Etd`
-    config.register_curation_concern :etd
     # # Injected via `rails g hyrax:work Cdl`
     config.register_curation_concern :cdl
 
