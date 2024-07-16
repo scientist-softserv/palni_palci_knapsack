@@ -4,10 +4,6 @@
 Rails.application.config.after_initialize do
   Hyrax.config do |config|
     # TODO: Valkyrize models and update this initializer
-    # Injected via `rails g hyrax:work Oer`
-    config.register_curation_concern :oer
-    # Injected via `rails g hyrax:work Etd`
-    config.register_curation_concern :etd
     # # Injected via `rails g hyrax:work Cdl`
     config.register_curation_concern :cdl
 
@@ -24,5 +20,12 @@ Rails.application.config.after_initialize do
     # config.enable_ffmpeg = false
 
     # config.branding_path = ENV.fetch('HYRAX_BRANDING_PATH', Rails.root.join('public', 'branding'))
+  end
+
+  # Ensure that valid_child_concerns are set with all the curation concerns including
+  # the ones registered from the Knapsack
+  Hyrax.config.curation_concerns.each do |concern|
+    concern.valid_child_concerns = Hyrax.config.curation_concerns
+    "#{concern}Resource".safe_constantize&.valid_child_concerns = Hyrax.config.curation_concerns
   end
 end
