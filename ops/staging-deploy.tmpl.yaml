@@ -379,6 +379,9 @@ fcrepo:
   enabled: true
   servicePort: 8080
   postgresql:
+    password: $DB_PASSWORD
+    auth:
+      password: $DB_PASSWORD
     enabled: true
     image:
       repository: bitnami/postgresql
