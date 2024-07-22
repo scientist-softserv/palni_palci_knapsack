@@ -379,6 +379,9 @@ fcrepo:
   enabled: true
   servicePort: 8080
   postgresql:
+    password: $DB_PASSWORD
+    auth:
+      password: $DB_PASSWORD
     enabled: true
     image:
       repository: bitnami/postgresql
@@ -388,6 +391,10 @@ fcrepo:
     bucket: besties-fcrepo-clone
     access_key: $AWS_ACCESS_KEY_ID
     secret_key: $AWS_SECRET_ACCESS_KEY
+global:
+  postgresql:
+    auth:
+      postgresPassword: $DB_PASSWORD
 postgresql:
   enabled: false
 redis:
