@@ -89,7 +89,7 @@ extraEnvVars: &envVars
   - name: FCREPO_BASE_PATH
     value: /palni-palci-staging
   - name: FCREPO_HOST
-    value: fcrepo.staging-fcrepo.svc.cluster.local
+    value: palni-palci-knapsack-staging-fcrepo
   - name: FCREPO_PORT
     value: "8080"
   - name: FCREPO_REST_PATH
