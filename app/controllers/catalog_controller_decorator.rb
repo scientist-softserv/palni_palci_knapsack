@@ -61,6 +61,7 @@ CatalogController.configure_blacklight do |config|
   config.show_fields.clear
 
   config.add_show_field solr_name("title", :stored_searchable)
+  config.add_show_field solr_name("abstract", :stored_searchable)
   config.add_show_field solr_name('admin_note', :stored_searchable), label: "Administrative Notes"
   config.add_show_field solr_name("alternative_title", :stored_searchable), label: "Alternative title"
   config.add_show_field solr_name("creator", :stored_searchable)
@@ -152,6 +153,16 @@ CatalogController.configure_blacklight do |config|
         pf: solr_name
       }
     end
+  end
+
+  config.search_fields['all_fields'].clear
+  config.add_search_field('all_fields', label: 'All Fields', include_in_advanced_search: false) do |field|
+    all_names = config.show_fields.values.map(&:field).join(" ")
+    title_name = 'title_tesim'
+    field.solr_parameters = {
+      qf: "#{all_names} file_format_tesim all_text_timv",
+      pf: title_name.to_s
+    }
   end
 
   # If there is something additional about a search field that needs to be customized i.e. whether to include in advanced search, or if it needs a different solr name, add it below
