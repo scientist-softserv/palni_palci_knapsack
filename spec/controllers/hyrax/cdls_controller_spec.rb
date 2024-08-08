@@ -10,7 +10,17 @@ RSpec.describe Hyrax::CdlsController do
   describe "#presenter" do
     subject { controller.send :presenter }
 
-    let(:solr_document) { SolrDocument.new(FactoryBot.create(:cdl).to_solr) }
+    let(:solr_hash) do
+      {
+        'has_model_ssim' => ['Cdl'],
+        'id' => 'abc123',
+        'title_tesim' => ['Test title']
+      }
+    end
+
+    let(:solr_document) do
+      SolrDocument.new(solr_hash)
+    end
 
     before do
       allow(controller).to receive(:search_result_document).and_return(solr_document)
