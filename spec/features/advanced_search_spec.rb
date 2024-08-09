@@ -15,7 +15,7 @@ RSpec.describe 'Advanced Search', type: :feature, js: true, clean: true do
       search_btn.send_keys :enter
 
       # Commenting out this because a weird error happens when #to_solr is called on a work
-      #   where the search facet disappears.  No idea way but a way to replicate this is to
+      #   where the search facet disappears.  No idea why but a way to replicate this is to
       #   create a work in this test and you'll see the failure.
       # expect(page).to have_content('ambitious aardvark')
       expect(page).to have_content('No results found for your search')
