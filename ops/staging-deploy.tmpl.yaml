@@ -66,8 +66,6 @@ ingress:
       secretName: palni-palci-staging-tls
 
 extraEnvVars: &envVars
-  - name: BUNDLE_BUNDLER_INJECT__GEM_PATH
-    value: /app/samvera/bundler.d
   - name: BUNDLE_DISABLE_LOCAL_BRANCH_CHECK
     value: "true"
   - name: BUNDLE_LOCAL__HYKU_KNAPSACK
