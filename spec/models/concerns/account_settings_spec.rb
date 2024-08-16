@@ -36,6 +36,7 @@ RSpec.describe AccountSettings do
     end
 
     context 'when is_superadmin is false' do
+      # rubocop:disable RSpec/ExampleLength
       it 'returns all settings except private, disabled, and superadmin settings' do
         expect(Account.superadmin_settings.size).to eq 7
         expect(account.public_settings(is_superadmin: false).keys.sort).to eq %i[allow_downloads
@@ -56,6 +57,7 @@ RSpec.describe AccountSettings do
                                                                                  ssl_configured]
         expect(account.public_settings(is_superadmin: false).size).to eq 16
       end
+      # rubocop:enable RSpec/ExampleLength
     end
   end
 end
