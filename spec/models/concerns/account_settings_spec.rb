@@ -30,12 +30,11 @@ RSpec.describe AccountSettings do
            solr_collection_options
            ssl_configured]
       end
-      # rubocop:disable RSpec/ExampleLength
+
       it 'returns all settings except private and disabled settings' do
         expect(account.public_settings(is_superadmin: true).keys.sort).to eq settings_list
         expect(account.public_settings(is_superadmin: true).size).to eq 23
       end
-      # rubocop:enable RSpec/ExampleLength
     end
 
     context 'when is_superadmin is false' do
@@ -57,11 +56,13 @@ RSpec.describe AccountSettings do
            solr_collection_options
            ssl_configured]
       end
+
       it 'returns all settings except private, disabled, and superadmin settings' do
         expect(Account.superadmin_settings.size).to eq 7
         expect(account.public_settings(is_superadmin: false).keys.sort).to eq settings_list
         expect(account.public_settings(is_superadmin: false).size).to eq 16
       end
+
     end
   end
 end
