@@ -6,6 +6,6 @@
 # or `ensure_gem` to make sure a gem is there w/o worrying about if it is an
 # override or not
 
-gem "sentry-ruby"
-gem "sentry-rails"
-gem "sentry-sidekiq"
+ensure_gem "sentry-ruby"
+ensure_gem "sentry-rails"
+ensure_gem "sentry-sidekiq"
