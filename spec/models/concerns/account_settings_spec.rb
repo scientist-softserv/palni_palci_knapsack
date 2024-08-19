@@ -62,7 +62,6 @@ RSpec.describe AccountSettings do
         expect(account.public_settings(is_superadmin: false).keys.sort).to eq settings_list
         expect(account.public_settings(is_superadmin: false).size).to eq 16
       end
-
     end
   end
 end
