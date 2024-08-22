@@ -179,7 +179,7 @@ extraEnvVars: &envVars
   - name: SOLR_COLLECTION_NAME
     value: palni-palci-staging
   - name: SOLR_CONFIGSET_NAME
-    value: palni-palci-staging
+    value: production-palni-palci
   - name: SOLR_HOST
     value: solr.solr
   - name: SOLR_PORT
