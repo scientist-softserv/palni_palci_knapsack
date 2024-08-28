@@ -10,4 +10,4 @@ module Adl
   end
 end
 
-Hyrax::ThumbnailPathServiceDecorator.prepend( Adl::ThumbnailPathServiceDecorator)
+Hyrax::ThumbnailPathServiceDecorator.prepend(Adl::ThumbnailPathServiceDecorator)
