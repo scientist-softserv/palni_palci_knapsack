@@ -75,6 +75,14 @@ attributes:
       - "bibliographic_citation_sim"
       - "bibliographic_citation_tesim"
     predicate: http://purl.org/dc/terms/bibliographicCitation
+  collection_subtitle:
+    type: string
+    multiple: true
+    form:
+      primary: true
+    index_keys:
+      - 'collection_subtitle_sim'
+      - 'collection_subtitle_tesim'
   contributor:
     type: string
     multiple: true
@@ -88,8 +96,8 @@ attributes:
     type: string
     multiple: true
     form:
-      required: true
-      primary: true
+      required: false
+      primary: false
     index_keys:
       - "creator_sim"
       - "creator_tesim"
@@ -107,7 +115,7 @@ attributes:
     type: string
     multiple: true
     form:
-      primary: false
+      primary: true
     index_keys:
       - "description_sim"
       - "description_tesim"
@@ -202,7 +210,7 @@ attributes:
     type: string
     multiple: true
     form:
-      primary: true
+      primary: false
     index_keys:
       - "rights_statement_sim"
       - "rights_statement_tesim"
