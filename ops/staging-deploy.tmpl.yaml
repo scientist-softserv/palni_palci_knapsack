@@ -66,8 +66,6 @@ ingress:
       secretName: palni-palci-staging-tls
 
 extraEnvVars: &envVars
-  - name: BUNDLE_BUNDLER_INJECT__GEM_PATH
-    value: /app/samvera/bundler.d
   - name: BUNDLE_DISABLE_LOCAL_BRANCH_CHECK
     value: "true"
   - name: BUNDLE_LOCAL__HYKU_KNAPSACK
@@ -181,7 +179,7 @@ extraEnvVars: &envVars
   - name: SOLR_COLLECTION_NAME
     value: palni-palci-staging
   - name: SOLR_CONFIGSET_NAME
-    value: palni-palci-staging
+    value: production-palni-palci
   - name: SOLR_HOST
     value: solr.solr
   - name: SOLR_PORT
@@ -194,6 +192,8 @@ extraEnvVars: &envVars
     value: testing123
   - name: VALKYRIE_ID_TYPE
     value: string
+  - name: VALKYRIE_TRANSITION
+    value: "true"
 
 worker:
   replicaCount: 1

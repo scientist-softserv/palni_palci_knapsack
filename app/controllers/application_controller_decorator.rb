@@ -82,7 +82,7 @@ module ApplicationControllerDecorator
 
   def set_sentry_context
     Sentry.set_user(id: session[:current_user_id]) # Set user context
-    Sentry.set_extras(params: params.to_unsafe_h, url: request.url)  # Set extra context
+    Sentry.set_extras(params: params.to_unsafe_h, url: request.url) # Set extra context
   end
 end
 
