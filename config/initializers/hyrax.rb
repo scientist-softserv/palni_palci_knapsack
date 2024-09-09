@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Use this to override any Hyrax configuration from the Knapsack
-Rails.application.config.after_initialize do
+Rails.application.config.before_initialize do
   Hyrax.config do |config|
     # TODO: Valkyrize models and update this initializer
     # # Injected via `rails g hyrax:work Cdl`
@@ -23,7 +23,9 @@ Rails.application.config.after_initialize do
 
     config.simple_schema_loader_config_search_paths.unshift(HykuKnapsack::Engine.root)
   end
+end
 
+Rails.application.config.after_initialize do
   # Ensure that valid_child_concerns are set with all the curation concerns including
   # the ones registered from the Knapsack
   Hyrax.config.curation_concerns.each do |concern|
