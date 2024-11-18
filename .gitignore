@@ -11,3 +11,7 @@ scratch.md
 /coverage
 file_cache/
 .byebug_history
+
+# we don't want Gemfile lockfile committed in the knapsack
+# It prevents Hyku's gemfile updates from taking effect like they should.
+Gemfile.lock
