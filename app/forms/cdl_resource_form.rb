@@ -6,8 +6,7 @@
 # @see https://github.com/samvera/hyrax/wiki/Hyrax-Valkyrie-Usage-Guide#forms
 # @see https://github.com/samvera/valkyrie/wiki/ChangeSets-and-Dirty-Tracking
 class CdlResourceForm < Hyrax::Forms::ResourceForm(CdlResource)
-  # Commented out basic_metadata because these terms were added to cdl_resource so we can customize it.
-  # include Hyrax::FormFields(:basic_metadata)
+  include Hyrax::FormFields(:basic_metadata)
   include Hyrax::FormFields(:cdl_resource)
   include Hyrax::FormFields(:with_pdf_viewer)
   include Hyrax::FormFields(:with_video_embed)

@@ -45,7 +45,7 @@ CatalogController.configure_blacklight do |config|
   config.add_facet_field 'account_institution_name_ssim', label: 'Institution', limit: 5
 
   config.index_fields.clear
-
+  config.add_index_field 'based_near_label_tesim', itemprop: 'contentLocation', link_to_facet: 'based_near_label_sim' 
   config.add_index_field 'all_text_tsimv', highlight: true, helper_method: :render_ocr_snippets
   config.add_index_field solr_name("title", :stored_searchable), label: "Title", itemprop: 'name', if: false
   config.add_index_field solr_name("creator", :stored_searchable), itemprop: 'creator', link_to_search: solr_name("creator", :facetable)
