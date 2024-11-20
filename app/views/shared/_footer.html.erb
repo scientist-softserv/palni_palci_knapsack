@@ -1,5 +1,6 @@
+<%# Override Hyku to add privacy policy, logout link, navbar-inverse class%>
 <% current_year = Time.now.year %>
-<footer class="navbar navbar-inverse site-footer">
+<footer class="navbar navbar-inverse navbar-dark bg-dark site-footer">
   <div class="container-fluid">
     <div class="navbar-text d-flex justify-content-start">
       <p><%= t('hyrax.footer.service_html') %></p>
@@ -12,7 +13,7 @@
         <% if user_signed_in? %>
           <p><%= link_to t("hyrax.toolbar.profile.logout"), main_app.destroy_user_session_path %></p>
         <% else %>
-            <p><%= link_to t('hyku.footer.admin_login', default: [:'hyrax.toolbar.profile.login']), main_app.new_user_session_path %></p>
+          <p><%= link_to t('hyku.footer.admin_login', default: [:'hyrax.toolbar.profile.login']), main_app.new_user_session_path %></p>
         <% end %>
       </div>
       <div class="navbar-text text-right">
