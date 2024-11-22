@@ -3,8 +3,7 @@
 # Generated via
 #  `rails generate hyrax:work_resource CdlResource`
 class CdlResourceIndexer < Hyrax::ValkyrieWorkIndexer
-  # Commented out basic_metadata because these terms were added to cdl_resource so we can customize it.
-  # include Hyrax::Indexer(:basic_metadata)
+  include Hyrax::Indexer(:basic_metadata)
   include Hyrax::Indexer(:cdl_resource)
   include Hyrax::Indexer(:bulkrax_metadata)
   include Hyrax::Indexer(:with_pdf_viewer)
