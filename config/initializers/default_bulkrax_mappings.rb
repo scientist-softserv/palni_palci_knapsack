@@ -77,6 +77,7 @@ parser_mappings.each do |key, value|
 end
 
 # all parsers use the same mappings:
-Hyku.default_bulkrax_field_mappings = {}
-Hyku.default_bulkrax_field_mappings["Bulkrax::BagitParser"] = parser_mappings
-Hyku.default_bulkrax_field_mappings["Bulkrax::CsvParser"] = parser_mappings
+mappings = {}
+mappings["Bulkrax::BagitParser"] = parser_mappings
+mappings["Bulkrax::CsvParser"] = parser_mappings
+Hyku.default_bulkrax_field_mappings = mappings
